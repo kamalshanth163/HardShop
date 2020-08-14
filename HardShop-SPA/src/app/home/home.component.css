@@ -1,0 +1,28 @@
+.home-page{
+    /* background-image: url("../../assets/images/tool-room-dark.jpg"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.home-page .banner{
+    position: relative;
+    margin-top: 100px;
+    padding: 0 40px;
+    color: rgb(65, 65, 65);
+}
+
+.home-page .banner h1{
+    font-size: 80px;
+    color: rgb(39, 39, 39);
+}
+
+button{
+    margin-top: 20px;
+}
+
+
+
+

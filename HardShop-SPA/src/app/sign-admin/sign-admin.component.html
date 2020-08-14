@@ -1,0 +1,107 @@
+<!-- Dropdown link -->
+<div *ngIf="adminLoggedIn() && authService.decodedToken.unique_name == 'admin'" class="dropdown show" dropdown>
+    <a class="btn btn-secondary dropdown-toggle" dropdownToggle>
+      <i class="fa fa-cog"></i> {{ authService.decodedToken?.unique_name | titlecase}}
+    </a>
+    <div class="dropdown-menu" *dropdownMenu>
+      <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+    </div>
+  </div>
+  
+  <!-- Modal forms - Login and Register -->
+  <button *ngIf="!adminLoggedIn()" type="button" class="btn btn-control-panel" (click)="openModal(template)">Control Panel</button>
+  
+  <div class="form-body">
+  
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Admin Login</h4>
+            <button type="button" class="close pull-right" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+  
+        <!-- Login form -->
+       <form #loginForm="ngForm" *ngIf="account" class="form login-form" (ngSubmit)="adminLogin(model)">
+        <h2 class="text-center text-primary">Login</h2>
+        <hr />
+      
+        <div class="form-group">
+         <input
+             type="text"
+             class="form-control"
+             required
+             name="username"
+             placeholder="Username"
+             [(ngModel)]="model.username"
+             readonly
+          />
+        </div>
+      
+        <div class="form-group">
+          <input
+             type="password"
+             class="form-control"
+             required
+             name="password"
+             placeholder="Password"
+             [(ngModel)]="model.password"
+          />
+        </div>
+      
+        <div class="form-group text-center">
+          <button [disabled]="!loginForm.valid" (click)="modalRef.hide()" class="btn btn-success" type="submit" >Login</button>
+          <button class="btn btn-default ml-2" type="button" (click)="modalRef.hide()">
+            Cancel
+          </button>
+        </div>
+        <!-- <div class="form-group text-center">
+            <span>Don't have an account?</span> <a class="switch-link" (click)="haveAccount()"> Register</a>
+        </div> -->
+      </form>
+
+      <!-- Register form -->
+      <form #registerForm="ngForm" *ngIf="!account" class="form register-form" (ngSubmit)="adminRegister(model)">
+        <h2 class="text-center text-primary">Sign Up</h2>
+        <hr />
+        
+        <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              required
+              name="username"
+              placeholder="Username"
+              [(ngModel)]="model.username"
+            />
+        </div>
+        
+        <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              required
+              name="password"
+              placeholder="Password"
+              [(ngModel)]="model.password"
+            />
+       </div>
+     
+        <div class="form-group text-center">
+          <button class="btn btn-success" type="submit">Register</button>
+          <button class="btn btn-default ml-2" type="button"  (click)="modalRef.hide()">
+              Cancel
+          </button>
+        </div>
+       <div class="form-group text-center">
+           <span>Already have a account?</span> <a class="switch-link" (click)="haveAccount()"> Login</a>
+        </div>
+     </form>
+     
+    </div>
+  
+  </ng-template>
+  </div>
+  
+  

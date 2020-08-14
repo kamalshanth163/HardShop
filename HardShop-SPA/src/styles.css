@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+
+
+body{
+    background: rgb(243, 243, 243);
+}
+
+.alertify-notifier .ajs-message {
+    background: rgba(63, 63, 63, 0.95);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-shadow: none !important;
+    border: none;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    transition: ease-in-out;
+    font-family: roboto;
+    font-size: 14px;
+    font-weight: 100;
+}
+.alertify-notifier .ajs-message.ajs-success {
+    color: #fff;
+    background: rgba(42, 102, 54, 0.95);
+}
+.alertify-notifier .ajs-message.ajs-error {
+    color: #fff;
+    background: rgba(187, 69, 69, 0.95);
+}
+.alertify-notifier .ajs-message.ajs-warning {
+    color: #fff;
+    background: rgba(136, 111, 31, 0.95);
+}
+

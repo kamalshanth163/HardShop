@@ -1,0 +1,65 @@
+
+		HardShop - Ecommerce Web Application - Database structure
+__________________________________________________________________________________	
+   
+
+primary key**		Foreign key*
+
+----------------------------------------------------------------------------------	
+
+1) Products
+	ProdId**   ProdName   Desc   BrandId*   CategoryId*
+
+   Categories
+	CategoryId   CategoryName
+
+   Brands
+	BrandId   BrandName   Country
+
+   Models	
+	ModelId   ProdId*   ModelName
+
+   Sizes
+	SizeId   ModelId*   SizeName   Price   Discount   Quantity   
+	Status
+
+   Photos
+	PhotoId   PhotoUrl   Name   IsMain   PublicId
+
+   ProductOperations
+	ProdOpId   ProdId*   Name   Desc   Date   MemberId   MemberRole
+
+   ProductReviews
+	ProdId*   CusId*   Review   Date
+   
+   ProductRatings
+	ProdId*   CusId*   Rating   Date
+
+---------------------------------------------------------------------------------- 
+
+2) Customers
+	CusId**   FName   LName   Email   Phone   PassHash   PassSalt   
+	DOB   Created   LastActive   Role
+
+----------------------------------------------------------------------------------
+
+3) Admins
+	AdminId**   FName   LName   Email   Phone   PassHash   PassSalt   
+	DOB   Created   LastActive   Role
+
+----------------------------------------------------------------------------------
+
+4) Orders
+	OrdId**   OrdStatus   Created  Delivery   
+	Address   City   Country   ZipCode   Amount   Discount   Fee   Payment
+
+   OrderOperations
+	OrdOpId   OrdId*   Name   Desc   Date   MemberId   MemberRole
+
+----------------------------------------------------------------------------------
+
+5) Listings
+	OrdId*   ProdId*   Quantity   Price
+
+----------------------------------------------------------------------------------
+
