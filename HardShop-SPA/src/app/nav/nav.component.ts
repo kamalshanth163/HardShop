@@ -34,4 +34,9 @@ export class NavComponent implements OnInit {
   toggleSidebar() {
     this.opened = !this.opened;
   }
+  logout() {
+    localStorage.removeItem('token');
+    this.alertify.message('logged out');
+    this.router.navigate(['/home']);
+  }
 }

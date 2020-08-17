@@ -17,6 +17,7 @@ namespace HardShop_API.Models
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
         public string PhotoUrl { get; set; }
-
+        public ICollection<SalesOrder> SalesOrder { get; set; }
+        public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

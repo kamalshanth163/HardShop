@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace HardShop_API.Models
 {
     public class Size
@@ -8,7 +10,9 @@ namespace HardShop_API.Models
         public double Discount { get; set; }
         public int Quantity { get; set; }
         public string Status { get; set; }
-        public Model Model { get; set; }
         public int ModelId { get; set; }
+        public Model Model { get; set; }
+        public ICollection<SalesOrderList> SalesOrderLists { get; set; }
+        public ICollection<PurchaseOrderList> PurchaseOrderLists { get; set; }
     }
 }

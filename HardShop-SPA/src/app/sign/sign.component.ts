@@ -1,12 +1,9 @@
-import {
-  Component,
-  OnInit,
-  TemplateRef
-} from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertifyService } from '../_services/alertify.service.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign',
@@ -17,6 +14,7 @@ export class SignComponent implements OnInit {
   model: any = {};
   account: any = true;
   modalRef: BsModalRef;
+  registerForm: FormGroup;
 
   constructor(
     public authService: AuthService,
@@ -25,7 +23,33 @@ export class SignComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.registerForm = new FormGroup(
+      {
+        firstName: new FormControl('', Validators.required),
+        lastName: new FormControl('', Validators.required),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+        ]),
+        phone: new FormControl('', Validators.required),
+        dateOfBirth: new FormControl('', Validators.required),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(8),
+        ]),
+        confirmPassword: new FormControl('', Validators.required),
+      },
+      this.passwordMatchValidator
+    );
+  }
+
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('password').value === g.get('confirmPassword').value
+      ? null
+      : { mismatch: true };
+  }
 
   haveAccount() {
     this.account = !this.account;
@@ -54,6 +78,10 @@ export class SignComponent implements OnInit {
   }
 
   register(model: any) {
+    model.role = 'customer';
+
+    console.log(this.registerForm);
+
     this.authService.register(model).subscribe(
       (next) => {
         this.alertify.success('Successfully Registered!!');
@@ -62,6 +90,7 @@ export class SignComponent implements OnInit {
         this.alertify.error(error);
       }
     );
+    console.log(this.registerForm.value);
   }
 
   logout() {

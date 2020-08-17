@@ -12,6 +12,7 @@ export class AuthService {
   baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  username: any;
 
   bsModalRef: BsModalRef;
 
@@ -23,8 +24,9 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
+          localStorage.setItem('username', user.username);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          console.log(this.decodedToken);
+          this.username = user.username;
         }
       })
     );

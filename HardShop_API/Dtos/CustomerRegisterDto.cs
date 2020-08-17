@@ -15,10 +15,17 @@ namespace HardShop_API.Dtos {
         public string Email { get; set; }
 
         [Required]
+        public string CountryCode { get; set; }
+
+        [Required]
         public string Phone { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        public string Role { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
 

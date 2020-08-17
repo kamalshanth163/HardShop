@@ -2,7 +2,7 @@ using System;
 
 namespace HardShop_API.Models
 {
-    public class ProductOperation
+    public class SalesOrderOperation
     {
         public int Id { get; set; }
         public string Name { get; set; }
