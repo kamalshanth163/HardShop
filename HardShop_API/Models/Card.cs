@@ -11,9 +11,12 @@ namespace HardShop_API.Models
         public string Holder { get; set; }
         public string Issuer { get; set; }
         public DateTime ExpireDate { get; set; }
+        public DateTime Created { get; set; }
         public ICollection<CustomerCard> CustomerCards { get; set; }
-        public ICollection<SupplierCard> SupplierCards { get; set; }
+        public ICollection<AdminCard> AdminCards { get; set; }
         public ICollection<SalesOrder> SalesOrders { get; set; }
+        public ICollection<SalesOrderPayment> SalesOrderPayments { get; set; }
+        public ICollection<PurchaseOrderPayment> PurchaseOrderPayments { get; set; }
 
     }
 }

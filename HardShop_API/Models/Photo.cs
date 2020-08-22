@@ -5,7 +5,7 @@ namespace HardShop_API.Models {
         public string Name { get; set; }
         public bool IsMain { get; set; }
         public string PublicId { get; set; }
-        public Product Product { get; set; }
-        public int ProductId { get; set; }
+        public int ProductOptionId { get; set; }
+        public ProductOption ProductOption { get; set; }
     }
 }

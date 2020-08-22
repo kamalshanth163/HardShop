@@ -1,3 +1,5 @@
+using System;
+
 namespace HardShop_API.Models
 {
     public class CustomerPhone
@@ -6,5 +8,8 @@ namespace HardShop_API.Models
         public Customer Customer { get; set; }
         public int PhoneId { get; set; }
         public Phone Phone { get; set; }
+
+        public DateTime Created { get; set; }
+
     }
 }

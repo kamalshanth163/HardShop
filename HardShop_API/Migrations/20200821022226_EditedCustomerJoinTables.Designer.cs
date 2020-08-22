@@ -3,44 +3,51 @@ using System;
 using HardShop_API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HardShop_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200817142912_ExtendedModels")]
-    partial class ExtendedModels
+    [Migration("20200821022226_EditedCustomerJoinTables")]
+    partial class EditedCustomerJoinTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("HardShop_API.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address1")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address2")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -51,86 +58,122 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastActive")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("PhotoPublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoUrl")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Admins");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.Brand", b =>
+            modelBuilder.Entity("HardShop_API.Models.AdminCard", b =>
+                {
+                    b.Property<int>("AdminId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CardId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdminId", "CardId");
+
+                    b.HasIndex("CardId");
+
+                    b.ToTable("AdminCards");
+                });
+
+            modelBuilder.Entity("HardShop_API.Models.AdminDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("AdminId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PhoneId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("AdminId");
+
+                    b.HasIndex("PhoneId");
+
+                    b.ToTable("AdminDetails");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.Card", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CardNetworkId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ExpireDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Holder")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Issuer")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -143,71 +186,62 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("CardNetworks");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("HardShop_API.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastActive")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PhotoPublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoUrl")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -217,10 +251,10 @@ namespace HardShop_API.Migrations
             modelBuilder.Entity("HardShop_API.Models.CustomerAddress", b =>
                 {
                     b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("AddressId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("CustomerId", "AddressId");
 
@@ -232,10 +266,10 @@ namespace HardShop_API.Migrations
             modelBuilder.Entity("HardShop_API.Models.CustomerCard", b =>
                 {
                     b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("CardId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("CustomerId", "CardId");
 
@@ -247,10 +281,10 @@ namespace HardShop_API.Migrations
             modelBuilder.Entity("HardShop_API.Models.CustomerPhone", b =>
                 {
                     b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("PhoneId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("CustomerId", "PhoneId");
 
@@ -259,62 +293,33 @@ namespace HardShop_API.Migrations
                     b.ToTable("CustomerPhones");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.Model", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Models");
-                });
-
-            modelBuilder.Entity("HardShop_API.Models.PaymentMethod", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Method")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentMethods");
-                });
-
             modelBuilder.Entity("HardShop_API.Models.Phone", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CountryCode")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DialCode")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IntlNumber")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NatlNumber")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("e164Number")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -325,26 +330,27 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsMain")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("ProductOptionId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PublicId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductOptionId");
 
                     b.ToTable("Photos");
                 });
@@ -353,98 +359,137 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductCategoryId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ProductCategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("HardShop_API.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MainCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubCategory1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubCategory2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.ProductOperation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MemberId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("MemberRole")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int?>("ProductOptionId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductOptionId");
 
                     b.ToTable("ProductOperations");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.ProductRating", b =>
+            modelBuilder.Entity("HardShop_API.Models.ProductOption", b =>
                 {
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("REAL");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CustomerId", "ProductId");
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
 
-                    b.HasIndex("ProductId");
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("ProductRatings");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductOptions");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.ProductReview", b =>
                 {
                     b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("ProductOptionId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
 
                     b.Property<string>("Review")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CustomerId", "ProductId");
+                    b.HasKey("CustomerId", "ProductOptionId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductOptionId");
 
                     b.ToTable("ProductReviews");
                 });
@@ -453,37 +498,41 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AdminId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<double>("Arrears")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("Discount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("GrossAmount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("NetAmount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<string>("Status")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SupplierId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<double>("TotalFee")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("TotalPayment")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -497,29 +546,29 @@ namespace HardShop_API.Migrations
             modelBuilder.Entity("HardShop_API.Models.PurchaseOrderList", b =>
                 {
                     b.Property<int>("PurchaseOrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int>("SizeId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("ProductOptionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<double>("TotalDiscount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("TotalPrice")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("UnitDiscount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("UnitPrice")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
-                    b.HasKey("PurchaseOrderId", "SizeId");
+                    b.HasKey("PurchaseOrderId", "ProductOptionId");
 
-                    b.HasIndex("SizeId");
+                    b.HasIndex("ProductOptionId");
 
                     b.ToTable("PurchaseOrderLists");
                 });
@@ -528,25 +577,26 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MemberId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("MemberRole")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PurchaseOrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -559,36 +609,35 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("Amount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
+
+                    b.Property<int?>("CardId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("Fee")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
-                    b.Property<int?>("PaymentMethodId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Method")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PurchaseOrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentMethodId");
+                    b.HasIndex("CardId");
 
                     b.HasIndex("PurchaseOrderId");
-
-                    b.HasIndex("SupplierId");
 
                     b.ToTable("PurchaseOrderPayments");
                 });
@@ -597,49 +646,53 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AddressId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("AdminId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<double>("Arrears")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<int?>("CardId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("CustomerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Delivered")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("Discount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("GrossAmount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("NetAmount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<int?>("PhoneId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("TotalFee")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("TotalPayment")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -659,29 +712,29 @@ namespace HardShop_API.Migrations
             modelBuilder.Entity("HardShop_API.Models.SalesOrderList", b =>
                 {
                     b.Property<int>("SalesOrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int>("SizeId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("ProductOptionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<double>("TotalDiscount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("TotalPrice")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("UnitDiscount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<double>("UnitPrice")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
-                    b.HasKey("SalesOrderId", "SizeId");
+                    b.HasKey("SalesOrderId", "ProductOptionId");
 
-                    b.HasIndex("SizeId");
+                    b.HasIndex("ProductOptionId");
 
                     b.ToTable("SalesOrderLists");
                 });
@@ -690,25 +743,26 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MemberId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("MemberRole")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SalesOrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -721,143 +775,130 @@ namespace HardShop_API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("Amount")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int?>("CardId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("Fee")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
-                    b.Property<int?>("PaymentMethodId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Method")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SalesOrderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("PaymentMethodId");
+                    b.HasIndex("CardId");
 
                     b.HasIndex("SalesOrderId");
 
                     b.ToTable("SalesOrderPayments");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.Size", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Discount")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("ModelId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ModelId");
-
-                    b.ToTable("Sizes");
-                });
-
             modelBuilder.Entity("HardShop_API.Models.Supplier", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Owner")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoPublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoUrl")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.SupplierAddress", b =>
+            modelBuilder.Entity("HardShop_API.Models.SupplierDetail", b =>
                 {
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
 
-                    b.HasKey("SupplierId", "AddressId");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PhoneId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("SupplierAddresses");
-                });
-
-            modelBuilder.Entity("HardShop_API.Models.SupplierCard", b =>
-                {
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CardId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("SupplierId", "CardId");
-
-                    b.HasIndex("CardId");
-
-                    b.ToTable("SupplierCards");
-                });
-
-            modelBuilder.Entity("HardShop_API.Models.SupplierPhone", b =>
-                {
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PhoneId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("SupplierId", "PhoneId");
-
                     b.HasIndex("PhoneId");
 
-                    b.ToTable("SupplierPhones");
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("SupplierDetails");
+                });
+
+            modelBuilder.Entity("HardShop_API.Models.AdminCard", b =>
+                {
+                    b.HasOne("HardShop_API.Models.Admin", "Admin")
+                        .WithMany()
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HardShop_API.Models.Card", "Card")
+                        .WithMany()
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HardShop_API.Models.AdminDetail", b =>
+                {
+                    b.HasOne("HardShop_API.Models.Address", null)
+                        .WithMany("AdminDetails")
+                        .HasForeignKey("AddressId");
+
+                    b.HasOne("HardShop_API.Models.Admin", null)
+                        .WithMany("AdminDetails")
+                        .HasForeignKey("AdminId");
+
+                    b.HasOne("HardShop_API.Models.Phone", null)
+                        .WithMany("AdminDetails")
+                        .HasForeignKey("PhoneId");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.Card", b =>
@@ -912,59 +953,27 @@ namespace HardShop_API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.Model", b =>
-                {
-                    b.HasOne("HardShop_API.Models.Product", "Product")
-                        .WithMany("Models")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HardShop_API.Models.Photo", b =>
                 {
-                    b.HasOne("HardShop_API.Models.Product", "Product")
+                    b.HasOne("HardShop_API.Models.ProductOption", "ProductOption")
                         .WithMany("Photos")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ProductOptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("HardShop_API.Models.Product", b =>
                 {
-                    b.HasOne("HardShop_API.Models.Brand", "Brand")
+                    b.HasOne("HardShop_API.Models.ProductCategory", null)
                         .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HardShop_API.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductCategoryId");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.ProductOperation", b =>
                 {
-                    b.HasOne("HardShop_API.Models.Product", null)
+                    b.HasOne("HardShop_API.Models.ProductOption", null)
                         .WithMany("ProductOperations")
-                        .HasForeignKey("ProductId");
-                });
-
-            modelBuilder.Entity("HardShop_API.Models.ProductRating", b =>
-                {
-                    b.HasOne("HardShop_API.Models.Customer", "Customer")
-                        .WithMany("ProductRatings")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HardShop_API.Models.Product", "Product")
-                        .WithMany("ProductRatings")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductOptionId");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.ProductReview", b =>
@@ -975,9 +984,9 @@ namespace HardShop_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HardShop_API.Models.Product", "Product")
+                    b.HasOne("HardShop_API.Models.ProductOption", "ProductOption")
                         .WithMany("ProductReviews")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ProductOptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -995,15 +1004,15 @@ namespace HardShop_API.Migrations
 
             modelBuilder.Entity("HardShop_API.Models.PurchaseOrderList", b =>
                 {
-                    b.HasOne("HardShop_API.Models.PurchaseOrder", "PurchaseOrder")
-                        .WithMany("PurchaseOrderLists")
-                        .HasForeignKey("PurchaseOrderId")
+                    b.HasOne("HardShop_API.Models.ProductOption", "ProductOption")
+                        .WithMany()
+                        .HasForeignKey("ProductOptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HardShop_API.Models.Size", "Size")
+                    b.HasOne("HardShop_API.Models.PurchaseOrder", "PurchaseOrder")
                         .WithMany("PurchaseOrderLists")
-                        .HasForeignKey("SizeId")
+                        .HasForeignKey("PurchaseOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1017,17 +1026,13 @@ namespace HardShop_API.Migrations
 
             modelBuilder.Entity("HardShop_API.Models.PurchaseOrderPayment", b =>
                 {
-                    b.HasOne("HardShop_API.Models.PaymentMethod", null)
+                    b.HasOne("HardShop_API.Models.Card", null)
                         .WithMany("PurchaseOrderPayments")
-                        .HasForeignKey("PaymentMethodId");
+                        .HasForeignKey("CardId");
 
                     b.HasOne("HardShop_API.Models.PurchaseOrder", null)
                         .WithMany("PurchaseOrderPayments")
                         .HasForeignKey("PurchaseOrderId");
-
-                    b.HasOne("HardShop_API.Models.Supplier", null)
-                        .WithMany("PurchaseOrderPayments")
-                        .HasForeignKey("SupplierId");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.SalesOrder", b =>
@@ -1055,15 +1060,15 @@ namespace HardShop_API.Migrations
 
             modelBuilder.Entity("HardShop_API.Models.SalesOrderList", b =>
                 {
-                    b.HasOne("HardShop_API.Models.SalesOrder", "SalesOrder")
-                        .WithMany("SalesOrderLists")
-                        .HasForeignKey("SalesOrderId")
+                    b.HasOne("HardShop_API.Models.ProductOption", "ProductOption")
+                        .WithMany()
+                        .HasForeignKey("ProductOptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HardShop_API.Models.Size", "Size")
+                    b.HasOne("HardShop_API.Models.SalesOrder", "SalesOrder")
                         .WithMany("SalesOrderLists")
-                        .HasForeignKey("SizeId")
+                        .HasForeignKey("SalesOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1077,71 +1082,28 @@ namespace HardShop_API.Migrations
 
             modelBuilder.Entity("HardShop_API.Models.SalesOrderPayment", b =>
                 {
-                    b.HasOne("HardShop_API.Models.Customer", null)
+                    b.HasOne("HardShop_API.Models.Card", null)
                         .WithMany("SalesOrderPayments")
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("HardShop_API.Models.PaymentMethod", null)
-                        .WithMany("SalesOrderPayments")
-                        .HasForeignKey("PaymentMethodId");
+                        .HasForeignKey("CardId");
 
                     b.HasOne("HardShop_API.Models.SalesOrder", null)
                         .WithMany("SalesOrderPayments")
                         .HasForeignKey("SalesOrderId");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.Size", b =>
+            modelBuilder.Entity("HardShop_API.Models.SupplierDetail", b =>
                 {
-                    b.HasOne("HardShop_API.Models.Model", "Model")
-                        .WithMany("Sizes")
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.HasOne("HardShop_API.Models.Address", null)
+                        .WithMany("SupplierDetails")
+                        .HasForeignKey("AddressId");
 
-            modelBuilder.Entity("HardShop_API.Models.SupplierAddress", b =>
-                {
-                    b.HasOne("HardShop_API.Models.Address", "Address")
-                        .WithMany("SupplierAddresses")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("HardShop_API.Models.Phone", null)
+                        .WithMany("SupplierDetails")
+                        .HasForeignKey("PhoneId");
 
-                    b.HasOne("HardShop_API.Models.Supplier", "Supplier")
-                        .WithMany("SupplierAddresses")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HardShop_API.Models.SupplierCard", b =>
-                {
-                    b.HasOne("HardShop_API.Models.Card", "Card")
-                        .WithMany("SupplierCards")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HardShop_API.Models.Supplier", "Supplier")
-                        .WithMany("SupplierCards")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HardShop_API.Models.SupplierPhone", b =>
-                {
-                    b.HasOne("HardShop_API.Models.Phone", "Phone")
-                        .WithMany("SupplierPhones")
-                        .HasForeignKey("PhoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HardShop_API.Models.Supplier", "Supplier")
-                        .WithMany("SupplierPhones")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("HardShop_API.Models.Supplier", null)
+                        .WithMany("SupplierDetails")
+                        .HasForeignKey("SupplierId");
                 });
 #pragma warning restore 612, 618
         }

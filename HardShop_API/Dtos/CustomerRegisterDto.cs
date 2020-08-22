@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using HardShop_API.Models;
 
 namespace HardShop_API.Dtos {
     public class CustomerRegisterDto {
@@ -15,10 +16,10 @@ namespace HardShop_API.Dtos {
         public string Email { get; set; }
 
         [Required]
-        public string CountryCode { get; set; }
+        public PhoneCreateDto Phone { get; set; }
 
         [Required]
-        public string Phone { get; set; }
+        public string Gender { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
@@ -27,11 +28,13 @@ namespace HardShop_API.Dtos {
         public string Role { get; set; }
 
         public DateTime Created { get; set; }
+        
         public DateTime LastActive { get; set; }
 
         public CustomerRegisterDto () {
             Created = DateTime.Now;
             LastActive = DateTime.Now;
+            Role = "customer";
         }
 
     }

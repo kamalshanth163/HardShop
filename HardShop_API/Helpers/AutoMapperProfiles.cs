@@ -10,6 +10,10 @@ namespace HardShop_API.Helpers
         {
             CreateMap<CustomerRegisterDto, Customer>();
             CreateMap<AdminRegisterDto, Admin>();
+            CreateMap<PhoneCreateDto, Phone>(); 
+            CreateMap<ProductCategoryCreateDto, ProductCategory>();
+            CreateMap<ProductOptionCreateDto, ProductOption>();
+            CreateMap<ProductCreateDto, Product>();
         }
     }
 }

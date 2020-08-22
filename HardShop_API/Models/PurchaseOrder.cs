@@ -8,6 +8,7 @@ namespace HardShop_API.Models
         public int Id { get; set; }
         public string Status { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
         public double GrossAmount { get; set; }
         public double Discount { get; set; }
         public double NetAmount { get; set; }

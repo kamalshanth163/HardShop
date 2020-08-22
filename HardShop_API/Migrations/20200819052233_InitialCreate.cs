@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardShop_API.Migrations
 {
-    public partial class ExtendedModels : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,13 +12,14 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Address1 = table.Column<string>(nullable: true),
                     Address2 = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     Country = table.Column<string>(nullable: true),
-                    PostalCode = table.Column<string>(nullable: true)
+                    PostalCode = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,13 +31,12 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
                     PasswordSalt = table.Column<byte[]>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     Role = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
@@ -49,25 +49,11 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Brands",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Brands", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CardNetworks",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false)
                 },
@@ -77,24 +63,11 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
@@ -113,30 +86,18 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentMethods",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Method = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PaymentMethods", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Phones",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CountryCode = table.Column<string>(nullable: true),
                     DialCode = table.Column<string>(nullable: true),
                     e164Number = table.Column<string>(nullable: true),
                     IntlNumber = table.Column<string>(nullable: true),
                     NatlNumber = table.Column<string>(nullable: true),
-                    Number = table.Column<string>(nullable: true)
+                    Number = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,11 +105,47 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MainCategory = table.Column<string>(nullable: true),
+                    SubCategory1 = table.Column<string>(nullable: true),
+                    SubCategory2 = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductOptions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Brand = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
+                    Size = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true),
+                    Price = table.Column<double>(nullable: false),
+                    Discount = table.Column<double>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductOptions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Suppliers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Owner = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -166,12 +163,13 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<string>(nullable: true),
                     Number = table.Column<string>(nullable: true),
                     Holder = table.Column<string>(nullable: true),
                     Issuer = table.Column<string>(nullable: true),
                     ExpireDate = table.Column<DateTime>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
                     CardNetworkId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -183,34 +181,6 @@ namespace HardShop_API.Migrations
                         principalTable: "CardNetworks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    BrandId = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -238,6 +208,33 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AdminDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Created = table.Column<DateTime>(nullable: false),
+                    AddressId = table.Column<int>(nullable: true),
+                    PhoneId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdminDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AdminDetails_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AdminDetails_Phones_PhoneId",
+                        column: x => x.PhoneId,
+                        principalTable: "Phones",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CustomerPhones",
                 columns: table => new
                 {
@@ -262,13 +259,109 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    ProductCategoryId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_ProductCategories_ProductCategoryId",
+                        column: x => x.ProductCategoryId,
+                        principalTable: "ProductCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    IsMain = table.Column<bool>(nullable: false),
+                    PublicId = table.Column<string>(nullable: true),
+                    ProductOptionId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_ProductOptions_ProductOptionId",
+                        column: x => x.ProductOptionId,
+                        principalTable: "ProductOptions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductOperations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    MemberId = table.Column<int>(nullable: false),
+                    MemberRole = table.Column<string>(nullable: true),
+                    ProductOptionId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductOperations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductOperations_ProductOptions_ProductOptionId",
+                        column: x => x.ProductOptionId,
+                        principalTable: "ProductOptions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductReviews",
+                columns: table => new
+                {
+                    ProductOptionId = table.Column<int>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: false),
+                    Review = table.Column<string>(nullable: true),
+                    Rating = table.Column<float>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductReviews", x => new { x.CustomerId, x.ProductOptionId });
+                    table.ForeignKey(
+                        name: "FK_ProductReviews_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductReviews_ProductOptions_ProductOptionId",
+                        column: x => x.ProductOptionId,
+                        principalTable: "ProductOptions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PurchaseOrders",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
+                    LastUpdated = table.Column<DateTime>(nullable: false),
                     GrossAmount = table.Column<double>(nullable: false),
                     Discount = table.Column<double>(nullable: false),
                     NetAmount = table.Column<double>(nullable: false),
@@ -296,49 +389,59 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SupplierAddresses",
+                name: "SupplierDetails",
                 columns: table => new
                 {
-                    SupplierId = table.Column<int>(nullable: false),
-                    AddressId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Created = table.Column<DateTime>(nullable: false),
+                    AddressId = table.Column<int>(nullable: true),
+                    PhoneId = table.Column<int>(nullable: true),
+                    SupplierId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SupplierAddresses", x => new { x.SupplierId, x.AddressId });
+                    table.PrimaryKey("PK_SupplierDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SupplierAddresses_Addresses_AddressId",
+                        name: "FK_SupplierDetails_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SupplierAddresses_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SupplierPhones",
-                columns: table => new
-                {
-                    SupplierId = table.Column<int>(nullable: false),
-                    PhoneId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SupplierPhones", x => new { x.SupplierId, x.PhoneId });
-                    table.ForeignKey(
-                        name: "FK_SupplierPhones_Phones_PhoneId",
+                        name: "FK_SupplierDetails_Phones_PhoneId",
                         column: x => x.PhoneId,
                         principalTable: "Phones",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SupplierPhones_Suppliers_SupplierId",
+                        name: "FK_SupplierDetails_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdminCards",
+                columns: table => new
+                {
+                    AdminId = table.Column<int>(nullable: false),
+                    CardId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdminCards", x => new { x.AdminId, x.CardId });
+                    table.ForeignKey(
+                        name: "FK_AdminCards_Admins_AdminId",
+                        column: x => x.AdminId,
+                        principalTable: "Admins",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AdminCards_Cards_CardId",
+                        column: x => x.CardId,
+                        principalTable: "Cards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -372,9 +475,10 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
+                    LastUpdated = table.Column<DateTime>(nullable: false),
                     Delivered = table.Column<DateTime>(nullable: false),
                     GrossAmount = table.Column<double>(nullable: false),
                     Discount = table.Column<double>(nullable: false),
@@ -424,144 +528,30 @@ namespace HardShop_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SupplierCards",
+                name: "PurchaseOrderLists",
                 columns: table => new
                 {
-                    SupplierId = table.Column<int>(nullable: false),
-                    CardId = table.Column<int>(nullable: false)
+                    PurchaseOrderId = table.Column<int>(nullable: false),
+                    ProductOptionId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    UnitPrice = table.Column<double>(nullable: false),
+                    TotalPrice = table.Column<double>(nullable: false),
+                    UnitDiscount = table.Column<double>(nullable: false),
+                    TotalDiscount = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SupplierCards", x => new { x.SupplierId, x.CardId });
+                    table.PrimaryKey("PK_PurchaseOrderLists", x => new { x.PurchaseOrderId, x.ProductOptionId });
                     table.ForeignKey(
-                        name: "FK_SupplierCards_Cards_CardId",
-                        column: x => x.CardId,
-                        principalTable: "Cards",
+                        name: "FK_PurchaseOrderLists_ProductOptions_ProductOptionId",
+                        column: x => x.ProductOptionId,
+                        principalTable: "ProductOptions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SupplierCards_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Models",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    ProductId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Models", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Models_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Photos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    IsMain = table.Column<bool>(nullable: false),
-                    PublicId = table.Column<string>(nullable: true),
-                    ProductId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Photos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Photos_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductOperations",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    MemberId = table.Column<int>(nullable: false),
-                    MemberRole = table.Column<string>(nullable: true),
-                    ProductId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductOperations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductOperations_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductRatings",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false),
-                    Rating = table.Column<float>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductRatings", x => new { x.CustomerId, x.ProductId });
-                    table.ForeignKey(
-                        name: "FK_ProductRatings_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductRatings_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductReviews",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false),
-                    Review = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductReviews", x => new { x.CustomerId, x.ProductId });
-                    table.ForeignKey(
-                        name: "FK_ProductReviews_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductReviews_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_PurchaseOrderLists_PurchaseOrders_PurchaseOrderId",
+                        column: x => x.PurchaseOrderId,
+                        principalTable: "PurchaseOrders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -571,7 +561,7 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
@@ -595,22 +585,22 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<string>(nullable: true),
+                    Method = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<double>(nullable: false),
                     Fee = table.Column<double>(nullable: false),
-                    PaymentMethodId = table.Column<int>(nullable: true),
-                    PurchaseOrderId = table.Column<int>(nullable: true),
-                    SupplierId = table.Column<int>(nullable: true)
+                    CardId = table.Column<int>(nullable: true),
+                    PurchaseOrderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PurchaseOrderPayments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PurchaseOrderPayments_PaymentMethods_PaymentMethodId",
-                        column: x => x.PaymentMethodId,
-                        principalTable: "PaymentMethods",
+                        name: "FK_PurchaseOrderPayments_Cards_CardId",
+                        column: x => x.CardId,
+                        principalTable: "Cards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -619,12 +609,35 @@ namespace HardShop_API.Migrations
                         principalTable: "PurchaseOrders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SalesOrderLists",
+                columns: table => new
+                {
+                    SalesOrderId = table.Column<int>(nullable: false),
+                    ProductOptionId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    UnitPrice = table.Column<double>(nullable: false),
+                    TotalPrice = table.Column<double>(nullable: false),
+                    UnitDiscount = table.Column<double>(nullable: false),
+                    TotalDiscount = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SalesOrderLists", x => new { x.SalesOrderId, x.ProductOptionId });
                     table.ForeignKey(
-                        name: "FK_PurchaseOrderPayments_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
+                        name: "FK_SalesOrderLists_ProductOptions_ProductOptionId",
+                        column: x => x.ProductOptionId,
+                        principalTable: "ProductOptions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SalesOrderLists_SalesOrders_SalesOrderId",
+                        column: x => x.SalesOrderId,
+                        principalTable: "SalesOrders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -632,7 +645,7 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
@@ -656,28 +669,22 @@ namespace HardShop_API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<string>(nullable: true),
+                    Method = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<double>(nullable: false),
                     Fee = table.Column<double>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: true),
-                    PaymentMethodId = table.Column<int>(nullable: true),
+                    CardId = table.Column<int>(nullable: true),
                     SalesOrderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesOrderPayments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SalesOrderPayments_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SalesOrderPayments_PaymentMethods_PaymentMethodId",
-                        column: x => x.PaymentMethodId,
-                        principalTable: "PaymentMethods",
+                        name: "FK_SalesOrderPayments_Cards_CardId",
+                        column: x => x.CardId,
+                        principalTable: "Cards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -688,87 +695,20 @@ namespace HardShop_API.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Sizes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Price = table.Column<double>(nullable: false),
-                    Discount = table.Column<double>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    ModelId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sizes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sizes_Models_ModelId",
-                        column: x => x.ModelId,
-                        principalTable: "Models",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_AdminCards_CardId",
+                table: "AdminCards",
+                column: "CardId");
 
-            migrationBuilder.CreateTable(
-                name: "PurchaseOrderLists",
-                columns: table => new
-                {
-                    PurchaseOrderId = table.Column<int>(nullable: false),
-                    SizeId = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    UnitPrice = table.Column<double>(nullable: false),
-                    TotalPrice = table.Column<double>(nullable: false),
-                    UnitDiscount = table.Column<double>(nullable: false),
-                    TotalDiscount = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PurchaseOrderLists", x => new { x.PurchaseOrderId, x.SizeId });
-                    table.ForeignKey(
-                        name: "FK_PurchaseOrderLists_PurchaseOrders_PurchaseOrderId",
-                        column: x => x.PurchaseOrderId,
-                        principalTable: "PurchaseOrders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PurchaseOrderLists_Sizes_SizeId",
-                        column: x => x.SizeId,
-                        principalTable: "Sizes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_AdminDetails_AddressId",
+                table: "AdminDetails",
+                column: "AddressId");
 
-            migrationBuilder.CreateTable(
-                name: "SalesOrderLists",
-                columns: table => new
-                {
-                    SalesOrderId = table.Column<int>(nullable: false),
-                    SizeId = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    UnitPrice = table.Column<double>(nullable: false),
-                    TotalPrice = table.Column<double>(nullable: false),
-                    UnitDiscount = table.Column<double>(nullable: false),
-                    TotalDiscount = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SalesOrderLists", x => new { x.SalesOrderId, x.SizeId });
-                    table.ForeignKey(
-                        name: "FK_SalesOrderLists_SalesOrders_SalesOrderId",
-                        column: x => x.SalesOrderId,
-                        principalTable: "SalesOrders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SalesOrderLists_Sizes_SizeId",
-                        column: x => x.SizeId,
-                        principalTable: "Sizes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_AdminDetails_PhoneId",
+                table: "AdminDetails",
+                column: "PhoneId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cards_CardNetworkId",
@@ -791,44 +731,29 @@ namespace HardShop_API.Migrations
                 column: "PhoneId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Models_ProductId",
-                table: "Models",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Photos_ProductId",
+                name: "IX_Photos_ProductOptionId",
                 table: "Photos",
-                column: "ProductId");
+                column: "ProductOptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductOperations_ProductId",
+                name: "IX_ProductOperations_ProductOptionId",
                 table: "ProductOperations",
-                column: "ProductId");
+                column: "ProductOptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductRatings_ProductId",
-                table: "ProductRatings",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductReviews_ProductId",
+                name: "IX_ProductReviews_ProductOptionId",
                 table: "ProductReviews",
-                column: "ProductId");
+                column: "ProductOptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_BrandId",
+                name: "IX_Products_ProductCategoryId",
                 table: "Products",
-                column: "BrandId");
+                column: "ProductCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseOrderLists_SizeId",
+                name: "IX_PurchaseOrderLists_ProductOptionId",
                 table: "PurchaseOrderLists",
-                column: "SizeId");
+                column: "ProductOptionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseOrderOperations_PurchaseOrderId",
@@ -836,19 +761,14 @@ namespace HardShop_API.Migrations
                 column: "PurchaseOrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PurchaseOrderPayments_PaymentMethodId",
+                name: "IX_PurchaseOrderPayments_CardId",
                 table: "PurchaseOrderPayments",
-                column: "PaymentMethodId");
+                column: "CardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseOrderPayments_PurchaseOrderId",
                 table: "PurchaseOrderPayments",
                 column: "PurchaseOrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseOrderPayments_SupplierId",
-                table: "PurchaseOrderPayments",
-                column: "SupplierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseOrders_AdminId",
@@ -861,9 +781,9 @@ namespace HardShop_API.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesOrderLists_SizeId",
+                name: "IX_SalesOrderLists_ProductOptionId",
                 table: "SalesOrderLists",
-                column: "SizeId");
+                column: "ProductOptionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesOrderOperations_SalesOrderId",
@@ -871,14 +791,9 @@ namespace HardShop_API.Migrations
                 column: "SalesOrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesOrderPayments_CustomerId",
+                name: "IX_SalesOrderPayments_CardId",
                 table: "SalesOrderPayments",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SalesOrderPayments_PaymentMethodId",
-                table: "SalesOrderPayments",
-                column: "PaymentMethodId");
+                column: "CardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesOrderPayments_SalesOrderId",
@@ -911,28 +826,29 @@ namespace HardShop_API.Migrations
                 column: "PhoneId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sizes_ModelId",
-                table: "Sizes",
-                column: "ModelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SupplierAddresses_AddressId",
-                table: "SupplierAddresses",
+                name: "IX_SupplierDetails_AddressId",
+                table: "SupplierDetails",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SupplierCards_CardId",
-                table: "SupplierCards",
-                column: "CardId");
+                name: "IX_SupplierDetails_PhoneId",
+                table: "SupplierDetails",
+                column: "PhoneId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SupplierPhones_PhoneId",
-                table: "SupplierPhones",
-                column: "PhoneId");
+                name: "IX_SupplierDetails_SupplierId",
+                table: "SupplierDetails",
+                column: "SupplierId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AdminCards");
+
+            migrationBuilder.DropTable(
+                name: "AdminDetails");
+
             migrationBuilder.DropTable(
                 name: "CustomerAddresses");
 
@@ -949,10 +865,10 @@ namespace HardShop_API.Migrations
                 name: "ProductOperations");
 
             migrationBuilder.DropTable(
-                name: "ProductRatings");
+                name: "ProductReviews");
 
             migrationBuilder.DropTable(
-                name: "ProductReviews");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "PurchaseOrderLists");
@@ -973,31 +889,22 @@ namespace HardShop_API.Migrations
                 name: "SalesOrderPayments");
 
             migrationBuilder.DropTable(
-                name: "SupplierAddresses");
+                name: "SupplierDetails");
 
             migrationBuilder.DropTable(
-                name: "SupplierCards");
-
-            migrationBuilder.DropTable(
-                name: "SupplierPhones");
+                name: "ProductCategories");
 
             migrationBuilder.DropTable(
                 name: "PurchaseOrders");
 
             migrationBuilder.DropTable(
-                name: "Sizes");
-
-            migrationBuilder.DropTable(
-                name: "PaymentMethods");
+                name: "ProductOptions");
 
             migrationBuilder.DropTable(
                 name: "SalesOrders");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
-
-            migrationBuilder.DropTable(
-                name: "Models");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
@@ -1015,16 +922,7 @@ namespace HardShop_API.Migrations
                 name: "Phones");
 
             migrationBuilder.DropTable(
-                name: "Products");
-
-            migrationBuilder.DropTable(
                 name: "CardNetworks");
-
-            migrationBuilder.DropTable(
-                name: "Brands");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

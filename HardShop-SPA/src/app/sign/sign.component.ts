@@ -3,7 +3,14 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertifyService } from '../_services/alertify.service.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Customer } from '../_models/customer';
 
 @Component({
   selector: 'app-sign',
@@ -12,36 +19,53 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SignComponent implements OnInit {
   model: any = {};
+  customer: Customer;
   account: any = true;
   modalRef: BsModalRef;
   registerForm: FormGroup;
+  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(
     public authService: AuthService,
     private modalService: BsModalService,
     private alertify: AlertifyService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.registerForm = new FormGroup(
+    this.bsConfig = {
+      containerClass: 'theme-dark-blue',
+    };
+    this.createRegisterForm();
+  }
+
+  createRegisterForm() {
+    this.registerForm = this.fb.group(
       {
-        firstName: new FormControl('', Validators.required),
-        lastName: new FormControl('', Validators.required),
-        email: new FormControl('', [
-          Validators.required,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
-        ]),
-        phone: new FormControl('', Validators.required),
-        dateOfBirth: new FormControl('', Validators.required),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(8),
-        ]),
-        confirmPassword: new FormControl('', Validators.required),
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+          ],
+        ],
+        phone: ['', Validators.required],
+        gender: ['', Validators.required],
+        dateOfBirth: ['', Validators.required],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(8),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
       },
-      this.passwordMatchValidator
+      { validator: this.passwordMatchValidator }
     );
   }
 
@@ -77,19 +101,23 @@ export class SignComponent implements OnInit {
     );
   }
 
-  register(model: any) {
-    model.role = 'customer';
+  register() {
+    if (this.registerForm.valid) {
+      this.registerForm.value.phone.intlNumber = this.registerForm.value.phone.internationalNumber;
+      delete this.registerForm.value.phone.internationalNumber;
+      this.registerForm.value.phone.natlNumber = this.registerForm.value.phone.nationalNumber;
+      delete this.registerForm.value.phone.nationalNumber;
 
-    console.log(this.registerForm);
-
-    this.authService.register(model).subscribe(
-      (next) => {
-        this.alertify.success('Successfully Registered!!');
-      },
-      (error) => {
-        this.alertify.error(error);
-      }
-    );
+      this.customer = Object.assign({}, this.registerForm.value);
+      this.authService.register(this.customer).subscribe(
+        (next) => {
+          this.alertify.success('Customer Registered Successfully!!');
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
+    }
     console.log(this.registerForm.value);
   }
 

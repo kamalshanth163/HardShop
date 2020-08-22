@@ -1,3 +1,5 @@
+using System;
+
 namespace HardShop_API.Models
 {
     public class CustomerCard
@@ -6,5 +8,8 @@ namespace HardShop_API.Models
         public Customer Customer { get; set; }
         public int CardId { get; set; }
         public Card Card { get; set; }
+
+        public DateTime Created { get; set; }
+
     }
 }

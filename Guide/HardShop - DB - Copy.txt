@@ -7,7 +7,7 @@ ________________________________________________________________________________
 
 
 1) Products
-	ProdId**   ProdName   Desc   BrandId*   CategoryId*   SupplierId*
+	ProdId**   ProdName   Description   BrandId*   CategoryId*
 
    Categories
 	CategoryId   CategoryName
@@ -71,36 +71,59 @@ ________________________________________________________________________________
 
 ----------------------------------------------------------------------------------
 
-4) Orders
-	OrdId**   OrdStatus   Created   Delivered   PhoneId*   
-	AddressId*   CardId*   GrossAmount   Discount   NetAmount
+4) Suppliers
+	SupId**   SupplierName   Owner   Email   Created   Role   PhotoUrl
+
+   SupplierPhones
+	SupId   PhoneId
+
+   SupplierAddresses
+	SupId   AddrId
+
+   SupplierCards
+	SupId   CardId
+
+----------------------------------------------------------------------------------
+
+5) SalesOrders
+	SaleOrdId**   CusId*   AdminId*   SaleOrdStatus   Created   Delivered   
+	PhoneId*   AddressId*   CardId*   GrossAmount   Discount   NetAmount
 	TotalPayment   Arrears   TotalFee
 
    PaymentMethods
 	PayMethId   Method
 
-   Payment
-	PaymentId   PaymentStatus   PayMethId*   OrdId*   CusId*   Date
-	Amount   Fee  
+   SalesOrderPayment
+	SaleOrdPaymentId   SalesOrdPaymentStatus   PayMethId*   SaleOrdId*   
+	CusId*   Date   Amount   Fee  
 
-   OrderOperations
-	OrdOpId   OrdId*   Name   Description   Date   MemberId   MemberRole
+   SalesOrderOperations
+	SaleOrdOpId   SaleOrdId*   Name   Description   Date   MemberId   
+	MemberRole
+
+   SalesOrderList
+	SalesOrdId*   SizeId*   Quantity  UnitPrice   TotalPrice   
+	UnitDiscount   TotalDiscount
 
 ----------------------------------------------------------------------------------
 
-5) Listings
-	OrdId*   ProdId*   Quantity   Price
+6) PurchaseOrders
+	PurchOrdId**   PurchOrdStatus   SupId*   AdminId*   Created   GrossAmount   
+	Discount   NetAmount   TotalPayment   Arrears   TotalFee 
+   
+   PurchaseOrderPayment
+	PurchOrdPaymentId   PurchOrdPaymentStatus   PayMethId*   PurchOrdId*   
+	SupId*   Date   Amount   Fee   
+   
+   PurchaseOrderOperations
+	PurchOrdOpId   PurchOrdId*   Name   Description   Date   MemberId   
+	MemberRole
+
+   PurchaseOrderList
+	PurchOrdId*   SizeId*   Quantity   UnitPrice   TotalPrice   UnitDiscount   
+	TotalDiscount
 
 ----------------------------------------------------------------------------------
-
-6) Suppliers
-	SupplierId   SupplierName   Owner   Email   Phone   Address1   Address2   	
-	City   State/Province   Country   PostalCode
-
-   PurchaseOrders
-	PurchId   
-
-sales	
 
 
 

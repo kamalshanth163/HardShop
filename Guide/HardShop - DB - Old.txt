@@ -1,0 +1,119 @@
+
+		HardShop - Ecommerce Web Application - Database structure
+__________________________________________________________________________________
+	  
+primary key**		Foreign key*
+__________________________________________________________________________________	
+
+
+1) Products
+	ProdId**   ProdName   Desc   BrandId*   CategoryId*   SupplierId*
+
+
+??
+   ProductOptions
+	ProdOptId   ProdId*   ModelId*   SizeId*
+	
+
+
+   Categories
+	CategoryId   CategoryName
+
+   Brands
+	BrandId   BrandName   Country
+
+   Models	
+	ModelId   ProdId*   ModelName
+
+   Sizes
+	SizeId   ModelId*   SizeName   Price   Discount   Quantity   
+	Status
+
+   Photos
+	PhotoId   PhotoUrl   Name   IsMain   PublicId
+
+   ProductOperations
+	ProdOpId   ProdId*   Name   Description   Date   MemberId   MemberRole
+
+   ProductReviews
+	ProdId*   CusId*   Review   Date
+   
+   ProductRatings
+	ProdId*   CusId*   Rating   Date
+
+---------------------------------------------------------------------------------- 
+
+2) Customers
+	CusId**   FName   LName   Gender   Email   PassHash   PassSalt   
+	DOB   Created   LastActive   Role   PhotoUrl
+
+   Phones
+	PhoneId   CountryCode   DialCode   e164Number   IntlNumber   NatlNumber
+	Number 
+
+   Addresses
+	AddrId   Address1   Address2   City   State/Province   	Country
+	PostalCode  
+
+   Cards
+	CardId   Type   Number   Holder   NetworkId   Issuer   ExpireDate
+
+   CardNetworks
+	CardNetId   NetworkName   Created  
+
+   CustomerPhones
+	CusId   PhoneId
+
+   CustomerAddresses
+	CusId   AddrId
+
+   CustomerCards
+	CusId   CardId
+    
+----------------------------------------------------------------------------------
+
+3) Admins
+	AdminId**   FName   LName   Email   Phone   PassHash   PassSalt   
+	DOB   Created   LastActive   Role   PhotoUrl
+
+----------------------------------------------------------------------------------
+
+4) Orders
+	OrdId**   OrdStatus   Created   Delivered   PhoneId*   
+	AddressId*   CardId*   GrossAmount   Discount   NetAmount
+	TotalPayment   Arrears   TotalFee
+
+   PaymentMethods
+	PayMethId   Method
+
+   Payment
+	PaymentId   PaymentStatus   PayMethId*   OrdId*   CusId*   Date
+	Amount   Fee  
+
+   OrderOperations
+	OrdOpId   OrdId*   Name   Description   Date   MemberId   MemberRole
+
+----------------------------------------------------------------------------------
+
+5) Listings
+	OrdId*   ProdId*   Quantity   Price
+
+----------------------------------------------------------------------------------
+
+6) Suppliers
+	SupplierId   SupplierName   Owner   Email   Phone   Address1   Address2   	
+	City   State/Province   Country   PostalCode
+
+   PurchaseOrders
+	PurchId   
+
+
+
+
+	
+
+
+
+
+
+

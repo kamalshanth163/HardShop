@@ -16,10 +16,12 @@ namespace HardShop_API.Dtos
         public string Email { get; set; }
 
         [Required]
-        public string Phone { get; set; }
+        public PhoneCreateDto Phone { get; set; }
+        public string Gender { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
+        public string Role { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
 
@@ -27,6 +29,7 @@ namespace HardShop_API.Dtos
         {
             Created = DateTime.Now;
             LastActive = DateTime.Now;
+            Role = "admin";
         }
     }
 }

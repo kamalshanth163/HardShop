@@ -38,6 +38,7 @@
 }
 
 .signup .form-control {
+  height: 38px;
   font-size: 14px;
   border: 1px solid rgb(206, 206, 206);
   background: rgb(255, 255, 255);
@@ -60,8 +61,21 @@
 }
 
 .signin .form-control {
+  height: 38px;
   font-size: 14px;
   border: 1px solid rgb(206, 206, 206);
   background: rgb(255, 255, 255);
   /* box-shadow: 4px 4px 6px #dddddd; */
+}
+.is-invalid {
+  border: 1px solid rgb(207, 56, 56) !important;
+}
+.invalid-feedback {
+  color: rgb(211, 20, 20);
+  font-size: 12px;
+}
+
+.intl-tel-input {
+  width: 200px;
+  border-radius: 4px;
 }

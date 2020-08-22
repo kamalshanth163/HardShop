@@ -7,32 +7,23 @@ ________________________________________________________________________________
 
 
 1) Products
-	ProdId**   ProdName   Description   BrandId*   CategoryId*
+	ProdId**   ProdName   ProdCategoryId*
 
-   Categories
-	CategoryId   CategoryName
+   ProductCategories
+	ProdCategoryId   MainCategory   SubCategory1   SubCategory2
 
-   Brands
-	BrandId   BrandName   Country
-
-   Models	
-	ModelId   ProdId*   ModelName
-
-   Sizes
-	SizeId   ModelId*   SizeName   Price   Discount   Quantity   
-	Status
+   ProductOptions
+	ProdOptId   Brand   ProdId*   Model   Size   Color   Price   Discount   
+	Quantity   Status   Description   
 
    Photos
-	PhotoId   PhotoUrl   Name   IsMain   PublicId
+	PhotoId   ProdOptId*   PhotoUrl   Name   IsMain   PublicId
 
    ProductOperations
-	ProdOpId   ProdId*   Name   Description   Date   MemberId   MemberRole
+	ProdOpeId   ProdOptId*   Name   Description   Date   MemberId   MemberRole
 
    ProductReviews
-	ProdId*   CusId*   Review   Date
-   
-   ProductRatings
-	ProdId*   CusId*   Rating   Date
+	ProdOptId*   CusId*   Review   Rating   Date
 
 ---------------------------------------------------------------------------------- 
 
@@ -66,22 +57,22 @@ ________________________________________________________________________________
 ----------------------------------------------------------------------------------
 
 3) Admins
-	AdminId**   FName   LName   Email   Phone   PassHash   PassSalt   
-	DOB   Created   LastActive   Role   PhotoUrl
+	AdminId**   FName   LName   Email   PassHash   PassSalt   DOB   Created   
+	LastActive   Role   PhotoUrl
+
+   AdminDetails
+	AdminDetId**   AdminId*   AddressId*   PhoneId*   Created
+
+   AdminCards
+	AdminId   CardId
 
 ----------------------------------------------------------------------------------
 
 4) Suppliers
 	SupId**   SupplierName   Owner   Email   Created   Role   PhotoUrl
 
-   SupplierPhones
-	SupId   PhoneId
-
-   SupplierAddresses
-	SupId   AddrId
-
-   SupplierCards
-	SupId   CardId
+   SupplierDetails
+	SupDeId**   SupId*   AddressId*   PhoneId*   Created
 
 ----------------------------------------------------------------------------------
 
@@ -90,35 +81,35 @@ ________________________________________________________________________________
 	PhoneId*   AddressId*   CardId*   GrossAmount   Discount   NetAmount
 	TotalPayment   Arrears   TotalFee
 
-   PaymentMethods
-	PayMethId   Method
-
    SalesOrderPayment
-	SaleOrdPaymentId   SalesOrdPaymentStatus   PayMethId*   SaleOrdId*   
-	CusId*   Date   Amount   Fee  
-
+	SaleOrdPaymentId   SalesOrdPaymentStatus   PayMethod  CardId*   
+	SaleOrdId*   Date   Amount   Fee
+  
    SalesOrderOperations
 	SaleOrdOpId   SaleOrdId*   Name   Description   Date   MemberId   
 	MemberRole
 
    SalesOrderList
-	SalesOrdId*   SizeId*   Quantity  UnitPrice   TotalPrice   		UnitDiscount   TotalDiscount
+	SalesOrdId*   ProdOptId*   Quantity  UnitPrice   TotalPrice   
+	UnitDiscount   TotalDiscount
 
 ----------------------------------------------------------------------------------
 
 6) PurchaseOrders
-	PurchOrdId**   PurchOrdStatus   SupId*   AdminId*   Created   GrossAmount   	Discount   NetAmount   TotalPayment   Arrears   TotalFee 
+	PurchOrdId**   PurchOrdStatus   SupId*   AdminId*   Created   GrossAmount  
+	Discount   NetAmount   TotalPayment   Arrears   TotalFee 
    
    PurchaseOrderPayment
-	PurchOrdPaymentId   PurchOrdPaymentStatus   PayMethId*   PurchOrdId*   
-	SupId*   Date   Amount   Fee   
+	PurchOrdPaymentId   PurchOrdPaymentStatus   PayMethod   CardId*   
+	PurchOrdId*   Date   	Amount   Fee  
    
    PurchaseOrderOperations
-	PurchOrdOpId   PurchOrdId*   Name   Description   Date   MemberId   
+	PurchOrdOpeId   PurchOrdId*   Name   Description   Date   MemberId   
 	MemberRole
 
    PurchaseOrderList
-	PurchOrdId*   SizeId*   Quantity   UnitPrice   TotalPrice   UnitDiscount   	TotalDiscount
+	PurchOrdId*   ProdOptId*   Quantity   UnitPrice   TotalPrice   
+	UnitDiscount   TotalDiscount
 
 ----------------------------------------------------------------------------------
 
