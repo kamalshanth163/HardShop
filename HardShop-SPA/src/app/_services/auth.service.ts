@@ -13,27 +13,31 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   username: any;
-
+  role: any;
   bsModalRef: BsModalRef;
 
   constructor(private http: HttpClient) {}
 
-  login(model: any) {
-    return this.http.post(this.baseUrl + 'login', model).pipe(
-      map((response: any) => {
-        const user = response;
-        if (user) {
-          localStorage.setItem('token', user.token);
-          localStorage.setItem('username', user.username);
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          this.username = user.username;
-        }
-      })
-    );
+  customerLogin(customerForLogin) {
+    return this.http
+      .post(this.baseUrl + 'customer/login', customerForLogin)
+      .pipe(
+        map((response: any) => {
+          const user = response;
+          if (user) {
+            localStorage.setItem('token', user.token);
+            localStorage.setItem('username', user.username);
+            localStorage.setItem('role', user.role);
+            this.decodedToken = this.jwtHelper.decodeToken(user.token);
+            this.username = user.username;
+            this.role = user.role;
+          }
+        })
+      );
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  customerRegister(customer) {
+    return this.http.post(this.baseUrl + 'customer/register', customer);
   }
 
   adminLogin(model: any) {
@@ -42,8 +46,9 @@ export class AuthService {
         const admin = response;
         if (admin) {
           localStorage.setItem('token', admin.token);
+          localStorage.setItem('username', admin.username);
           this.decodedToken = this.jwtHelper.decodeToken(admin.token);
-          console.log(this.decodedToken);
+          this.username = admin.username;
         }
       })
     );
@@ -57,4 +62,5 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
+
 }

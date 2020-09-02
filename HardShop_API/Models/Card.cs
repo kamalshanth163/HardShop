@@ -12,6 +12,8 @@ namespace HardShop_API.Models
         public string Issuer { get; set; }
         public DateTime ExpireDate { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
+
         public ICollection<CustomerCard> CustomerCards { get; set; }
         public ICollection<AdminCard> AdminCards { get; set; }
         public ICollection<SalesOrder> SalesOrders { get; set; }

@@ -10,6 +10,8 @@ namespace HardShop_API.Models
         public Customer Customer { get; set; }
         public string Review { get; set; }
         public float Rating { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
+
     }
 }

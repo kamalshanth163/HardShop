@@ -1,0 +1,43 @@
+.create-products{
+    padding: 40px 100px;
+}
+
+.tabs{
+    margin: 20px;
+    /* background: red; */
+}
+
+.form-control{
+    height: 30px;
+    padding: 2px 10px;
+}
+.desc-form-control{
+    height: 120px !important;
+}
+.form-group label{
+    font-size: 12px;
+    margin-top: 10px;
+}
+.form-group {
+    margin: 0;
+}
+
+.radio-inline{
+    padding: 10px 0px;
+    margin-right: 20px;
+}
+.radio-inline input{
+    margin-right: 10px;
+}
+
+.product-form .btn{
+    margin: 20px auto;
+    font-size: 14px;
+    float: right;
+}
+
+.product-create-form form{
+    padding: 20px 20px 80px;
+    margin-bottom: 40px;
+}
+

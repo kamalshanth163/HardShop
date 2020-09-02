@@ -13,12 +13,15 @@ export class AppComponent implements OnInit {
 
   constructor(public authService: AuthService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
-    if (token){
+    const role = localStorage.getItem('role');
+    if (token) {
       this.authService.decodedToken = this.jwtHelper.decodeToken(token);
       this.authService.username = username;
+      this.authService.role = role;
+      console.log(username);
     }
   }
 }

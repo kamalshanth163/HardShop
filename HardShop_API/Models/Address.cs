@@ -11,6 +11,8 @@ namespace HardShop_API.Models {
         public string Country { get; set; }
         public string PostalCode { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
+
         public ICollection<CustomerAddress> CustomerAddresses { get; set; }
         public ICollection<AdminAddress> AdminAddresses { get; set; }
         public ICollection<SupplierDetail> SupplierDetails { get; set; }

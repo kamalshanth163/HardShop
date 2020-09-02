@@ -1,3 +1,5 @@
+using System;
+
 namespace HardShop_API.Models {
     public class Photo {
         public int Id { get; set; }
@@ -6,6 +8,8 @@ namespace HardShop_API.Models {
         public bool IsMain { get; set; }
         public string PublicId { get; set; }
         public int ProductOptionId { get; set; }
+        public DateTime Created { get; set; }
+
         public ProductOption ProductOption { get; set; }
     }
 }

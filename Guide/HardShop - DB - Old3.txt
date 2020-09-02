@@ -1,0 +1,129 @@
+
+		HardShop - Ecommerce Web Application - Database structure
+__________________________________________________________________________________
+	  
+primary key**		Foreign key*
+__________________________________________________________________________________	
+
+
+1) Products
+	ProdId**   ProdName   BrandId*
+
+   ProductMainCategories
+	MainCatId   Name   Created
+	
+   ProductSubCategories
+	SubCatId   Name   Created   MainCatId
+
+   ProductBrands
+	BrandId   Name   Created
+
+   BrandSubCategories
+	BrandId   SubCatId   Created
+
+   ProductOptions
+	ProdOptId   ProdId*   Model   Size   Color   Price   Discount   
+	Quantity   Status   Description   
+
+   Photos
+	PhotoId   ProdOptId*   PhotoUrl   Name   IsMain   PublicId
+
+   ProductOperations
+	ProdOpeId   ProdOptId*   Name   Description   Date   MemberId   MemberRole
+
+   ProductReviews
+	ProdOptId*   CusId*   Review   Rating   Date
+
+---------------------------------------------------------------------------------- 
+
+2) Customers
+	CusId**   FName   LName   Gender   Email   PassHash   PassSalt   
+	DOB   Created   LastActive   Role   PhotoUrl
+
+   Phones
+	PhoneId   CountryCode   DialCode   e164Number   IntlNumber   NatlNumber
+	Number 
+
+   Addresses
+	AddrId   Address1   Address2   City   State/Province   	Country
+	PostalCode  
+
+   Cards
+	CardId   Type   Number   Holder   NetworkId   Issuer   ExpireDate
+
+   CardNetworks
+	CardNetId   NetworkName   Created  
+
+   CustomerPhones
+	CusId   PhoneId
+
+   CustomerAddresses
+	CusId   AddrId
+
+   CustomerCards
+	CusId   CardId
+    
+----------------------------------------------------------------------------------
+
+3) Admins
+	AdminId**   FName   LName   Email   PassHash   PassSalt   DOB   Created   
+	LastActive   Role   PhotoUrl
+
+   AdminDetails
+	AdminDetId**   AdminId*   AddressId*   PhoneId*   Created
+
+   AdminCards
+	AdminId   CardId
+
+----------------------------------------------------------------------------------
+
+4) Suppliers
+	SupId**   SupplierName   Owner   Email   Created   Role   PhotoUrl
+
+   SupplierDetails
+	SupDeId**   SupId*   AddressId*   PhoneId*   Created
+
+----------------------------------------------------------------------------------
+
+5) SalesOrders
+	SaleOrdId**   CusId*   AdminId*   SaleOrdStatus   Created   Delivered   
+	PhoneId*   AddressId*   CardId*   GrossAmount   Discount   NetAmount
+	TotalPayment   Arrears   TotalFee
+
+   SalesOrderPayment
+	SaleOrdPaymentId   SalesOrdPaymentStatus   PayMethod  CardId*   
+	SaleOrdId*   Date   Amount   Fee
+  
+   SalesOrderOperations
+	SaleOrdOpId   SaleOrdId*   Name   Description   Date   MemberId   
+	MemberRole
+
+   SalesOrderList
+	SalesOrdId*   ProdOptId*   Quantity  UnitPrice   TotalPrice   
+	UnitDiscount   TotalDiscount
+
+----------------------------------------------------------------------------------
+
+6) PurchaseOrders
+	PurchOrdId**   PurchOrdStatus   SupId*   AdminId*   Created   GrossAmount  
+	Discount   NetAmount   TotalPayment   Arrears   TotalFee 
+   
+   PurchaseOrderPayment
+	PurchOrdPaymentId   PurchOrdPaymentStatus   PayMethod   CardId*   
+	PurchOrdId*   Date   	Amount   Fee  
+   
+   PurchaseOrderOperations
+	PurchOrdOpeId   PurchOrdId*   Name   Description   Date   MemberId   
+	MemberRole
+
+   PurchaseOrderList
+	PurchOrdId*   ProdOptId*   Quantity   UnitPrice   TotalPrice   
+	UnitDiscount   TotalDiscount
+
+----------------------------------------------------------------------------------
+
+
+
+
+
+

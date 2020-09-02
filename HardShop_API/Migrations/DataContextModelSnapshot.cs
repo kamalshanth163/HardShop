@@ -41,6 +41,9 @@ namespace HardShop_API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -79,6 +82,9 @@ namespace HardShop_API.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("varbinary(max)");
@@ -176,6 +182,9 @@ namespace HardShop_API.Migrations
                     b.Property<string>("Issuer")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
@@ -197,6 +206,9 @@ namespace HardShop_API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -234,6 +246,9 @@ namespace HardShop_API.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("varbinary(max)");
@@ -328,6 +343,9 @@ namespace HardShop_API.Migrations
                     b.Property<string>("IntlNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NatlNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -348,6 +366,9 @@ namespace HardShop_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("bit");
@@ -378,23 +399,29 @@ namespace HardShop_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("HardShop_API.Models.ProductCategory", b =>
+            modelBuilder.Entity("HardShop_API.Models.ProductMainCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -404,18 +431,15 @@ namespace HardShop_API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("MainCategory")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("SubCategory1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubCategory2")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductMainCategories");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.ProductOperation", b =>
@@ -425,7 +449,7 @@ namespace HardShop_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -440,7 +464,7 @@ namespace HardShop_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductOptionId")
+                    b.Property<int>("ProductOptionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -457,20 +481,23 @@ namespace HardShop_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Currency")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Discount")
                         .HasColumnType("float");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
@@ -505,7 +532,10 @@ namespace HardShop_API.Migrations
                     b.Property<int>("ProductOptionId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("Rating")
@@ -519,6 +549,32 @@ namespace HardShop_API.Migrations
                     b.HasIndex("ProductOptionId");
 
                     b.ToTable("ProductReviews");
+                });
+
+            modelBuilder.Entity("HardShop_API.Models.ProductSubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MainCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MainCategoryId");
+
+                    b.ToTable("ProductSubCategories");
                 });
 
             modelBuilder.Entity("HardShop_API.Models.PurchaseOrder", b =>
@@ -773,7 +829,7 @@ namespace HardShop_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -811,7 +867,7 @@ namespace HardShop_API.Migrations
                     b.Property<int?>("CardId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("Fee")
@@ -848,6 +904,9 @@ namespace HardShop_API.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -879,6 +938,9 @@ namespace HardShop_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("PhoneId")
@@ -1006,18 +1068,20 @@ namespace HardShop_API.Migrations
 
             modelBuilder.Entity("HardShop_API.Models.Product", b =>
                 {
-                    b.HasOne("HardShop_API.Models.ProductCategory", "Category")
+                    b.HasOne("HardShop_API.Models.ProductSubCategory", "SubCategory")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("HardShop_API.Models.ProductOperation", b =>
                 {
-                    b.HasOne("HardShop_API.Models.ProductOption", null)
+                    b.HasOne("HardShop_API.Models.ProductOption", "ProductOption")
                         .WithMany("ProductOperations")
-                        .HasForeignKey("ProductOptionId");
+                        .HasForeignKey("ProductOptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HardShop_API.Models.ProductOption", b =>
@@ -1040,6 +1104,15 @@ namespace HardShop_API.Migrations
                     b.HasOne("HardShop_API.Models.ProductOption", "ProductOption")
                         .WithMany("ProductReviews")
                         .HasForeignKey("ProductOptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HardShop_API.Models.ProductSubCategory", b =>
+                {
+                    b.HasOne("HardShop_API.Models.ProductMainCategory", "MainCategory")
+                        .WithMany("ProductSubCategories")
+                        .HasForeignKey("MainCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

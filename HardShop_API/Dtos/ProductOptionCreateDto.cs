@@ -1,13 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HardShop_API.Dtos
-{
-    public class ProductOptionCreateDto
-    {
-        [Required]
-        public string Brand { get; set; }
-
+namespace HardShop_API.Dtos {
+    public class ProductOptionCreateDto {
+        
         [Required]
         public string Model { get; set; }
 
@@ -16,6 +12,9 @@ namespace HardShop_API.Dtos
 
         [Required]
         public string Color { get; set; }
+
+        [Required]
+        public string Currency { get; set; }
 
         [Required]
         public double Price { get; set; }
@@ -32,10 +31,13 @@ namespace HardShop_API.Dtos
         [Required]
         public string Description { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
 
-        public ProductOptionCreateDto()
-        {
+
+        public ProductOptionCreateDto () {
             Created = DateTime.Now;
+            LastUpdated = DateTime.Now;
         }
+
     }
 }

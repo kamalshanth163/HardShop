@@ -1,0 +1,266 @@
+<div class="create-products">
+  <div class="product-create-form">
+    <div class="row">
+      <!-- <div>
+
+      </div> -->
+      <div class="form col-md-6">
+        <h4>Create a product</h4>
+        <div class="product-form">
+          <form [formGroup]="productCreateForm" (ngSubmit)="createProduct()">
+            <!-----------------------------------------1st row ------------------------------------>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="radio-inline">
+                  <input
+                    type="radio"
+                    value="available"
+                    formControlName="status"
+                  />Available
+                </label>
+                <label class="radio-inline">
+                  <input
+                    type="radio"
+                    value="unavailable"
+                    formControlName="status"
+                  />Unavailable
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Main category</label>
+                <select
+                  #mainCategory
+                  	(change)='onOptionSelected(mainCategory.value)'
+                  [ngClass]="{
+                    'is-invalid':
+                      productCreateForm.get('mainCategory').errors &&
+                      productCreateForm.get('mainCategory').touched
+                  }"
+                  class="form-control"
+                  formControlName="mainCategory"
+                >
+                  <option
+                    *ngFor="let mainCategory of mainCategories"
+                    value="{{ mainCategory.name }}"
+                  >
+                    {{ mainCategory.name }}
+                  </option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a main category
+                </div>
+              </div>
+              <!-- ---------------------------------------------------------------------- -->
+              <div class="form-group col-md-6">
+                <label>Sub category</label>
+                <select
+                  [ngClass]="{
+                    'is-invalid':
+                      productCreateForm.get('subCategory').errors &&
+                      productCreateForm.get('subCategory').touched
+                  }"
+                  class="form-control"
+                  formControlName="subCategory"
+                >
+                  <option
+                    *ngFor="let subCategory of subCategories"
+                    value="{{ subCategory.name }}"
+                  >
+                    {{ subCategory.name }}
+                  </option>
+                </select>
+                <div class="invalid-feedback">Please select a sub category</div>
+              </div>
+            </div>
+            <!-- -------------------------------- 2nd row -------------------------------------- -->
+            <div class="form-row">
+              <div class="col md-6">
+                <div class="form-row">
+                  <div class="form-group col-md-8">
+                    <label>Product name</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('name').errors &&
+                          productCreateForm.get('name').touched
+                      }"
+                      class="form-control"
+                      formControlName="name"
+                    />
+                    <div class="invalid-feedback">
+                      Please enter product name
+                    </div>
+                  </div>
+                  <!-- --------------------------------------------------------------------- -->
+                  <div class="form-group col-md-4">
+                    <label>Brand</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('brand').errors &&
+                          productCreateForm.get('brand').touched
+                      }"
+                      class="form-control"
+                      formControlName="brand"
+                    />
+                    <div class="invalid-feedback">Please select a brand</div>
+                  </div>
+                </div>
+                <!-- --------------------------------------------------------------------------- -->
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label>Model</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('model').errors &&
+                          productCreateForm.get('model').touched
+                      }"
+                      class="form-control"
+                      formControlName="model"
+                    />
+                    <div class="invalid-feedback">
+                      Please enter product model
+                    </div>
+                  </div>
+                  <!-- ---------------------------------------------------------------------- -->
+                  <div class="form-group col-md-4">
+                    <label>Size</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('size').errors &&
+                          productCreateForm.get('size').touched
+                      }"
+                      class="form-control"
+                      formControlName="size"
+                    />
+                    <div class="invalid-feedback">
+                      Please enter product size
+                    </div>
+                  </div>
+                  <!-- ---------------------------------------------------------------------- -->
+                  <div class="form-group col-md-4">
+                    <label>Color</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('color').errors &&
+                          productCreateForm.get('color').touched
+                      }"
+                      class="form-control"
+                      formControlName="color"
+                    />
+                    <div class="invalid-feedback">
+                      Please enter product color
+                    </div>
+                  </div>
+                </div>
+                <!-- ----------------------------------------------------------------------- -->
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label>Currency</label>
+                    <select
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('currency').errors &&
+                          productCreateForm.get('currency').touched
+                      }"
+                      class="form-control"
+                      formControlName="currency"
+                    >
+                      <option value="USD">USD</option>
+                      <option value="LKR">LKR</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      Please enter product price
+                    </div>
+                  </div>
+                  <!-- ---------------------------------------------------------------------- -->
+                  <div class="form-group col-md-4">
+                    <label>Price</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('price').errors &&
+                          productCreateForm.get('price').touched
+                      }"
+                      class="form-control"
+                      formControlName="price"
+                    />
+                    <div class="invalid-feedback">
+                      Please enter product price
+                    </div>
+                  </div>
+                  <!-- ---------------------------------------------------------------------- -->
+                  <div class="form-group col-md-2">
+                    <label>Discount</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('discount').errors &&
+                          productCreateForm.get('discount').touched
+                      }"
+                      class="form-control"
+                      formControlName="discount"
+                    />
+                    <div class="invalid-feedback">Please enter a discount</div>
+                  </div>
+                  <!-- ---------------------------------------------------------------------- -->
+                  <div class="form-group col-md-4">
+                    <label>Quantity</label>
+                    <input
+                      [ngClass]="{
+                        'is-invalid':
+                          productCreateForm.get('quantity').errors &&
+                          productCreateForm.get('quantity').touched
+                      }"
+                      class="form-control"
+                      formControlName="quantity"
+                    />
+                    <div class="invalid-feedback">
+                      Please enter the quantity
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ---------------------------------------------------------------------- -->
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label>Description</label>
+                <textarea
+                  [ngClass]="{
+                    'is-invalid':
+                      productCreateForm.get('description').errors &&
+                      productCreateForm.get('description').touched
+                  }"
+                  class="form-control desc-form-control"
+                  formControlName="description"
+                ></textarea>
+                <div class="invalid-feedback">
+                  Please enter product description
+                </div>
+              </div>
+            </div>
+            <button
+              class="btn btn-success"
+              [disabled]="!productCreateForm.valid"
+              type="submit"
+            >
+              Create Product
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- Photo upload section -->
+      <div class="photo-upload col-md-6">
+        <h4>Upload product photos</h4>
+        <div class="form-row"></div>
+      </div>
+    </div>
+  </div>
+</div>

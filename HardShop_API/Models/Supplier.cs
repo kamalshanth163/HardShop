@@ -11,6 +11,8 @@ namespace HardShop_API.Models {
         public string PhotoUrl { get; set; }
         public string PhotoPublicId { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
+
         public ICollection<SupplierDetail> SupplierDetails { get; set; }
         public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }

@@ -1,0 +1,38 @@
+.navbar{
+    font-size: 14px;
+    height: 70px;
+}
+.nav-item{
+    margin: 0 10px;
+    /* line-height: 30px; */
+}
+.search-bar {
+    width: 500px;
+    height: 30px;
+    line-height: 60px;
+    margin-left: 100px;
+}
+
+.search-bar .form-control{
+    font-size: 14px;
+    border: 0px;
+}
+.search-bar .btn{
+    font-size: 14px;
+    background: rgb(231, 231, 231);
+    border: 0px;
+    border-radius: 0px;
+
+}
+.search-bar .search-icon{
+    border-radius: 0px;
+    background: rgb(78, 78, 78);
+}
+
+ng-sidebar-container{
+    display: none;
+}
+
+.nav-customer{
+    background: rgb(35, 32, 51);
+}

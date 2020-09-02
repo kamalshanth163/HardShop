@@ -7,13 +7,16 @@ ________________________________________________________________________________
 
 
 1) Products
-	ProdId**   ProdName   ProdCategoryId*
+	ProdId**   ProdName   Brand   SubCatId*
 
-   ProductCategories
-	ProdCategoryId   MainCategory   SubCategory1   SubCategory2
+   ProductMainCategories
+	MainCatId   Name   Created   lastUpdated
+	
+   ProductSubCategories
+	SubCatId   Name   Created   lastUpdated   MainCatId*
 
    ProductOptions
-	ProdOptId   Brand   ProdId*   Model   Size   Color   Price   Discount   
+	ProdOptId   ProdId*   Model   Size   Color   Price   Discount   
 	Quantity   Status   Description   
 
    Photos

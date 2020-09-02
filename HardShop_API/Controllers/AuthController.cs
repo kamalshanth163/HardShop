@@ -31,7 +31,7 @@ namespace HardShop_API.Controllers
             _config = config;
         }
 
-        [HttpPost("customers/register")]
+        [HttpPost("customer/register")]
         public async Task<IActionResult> CustomerRegister(CustomerRegisterDto customerRegisterDto)
         {
 
@@ -51,7 +51,7 @@ namespace HardShop_API.Controllers
             return StatusCode(201);
         }
 
-        [HttpPost("customers/login")]
+        [HttpPost("customer/login")]
         public async Task<IActionResult> CustomerLogin(CustomerLoginDto customerLoginDto)
         {
             var customerFromRepo = await _authRepo.CustomerLogin(customerLoginDto.Email.ToLower(), customerLoginDto.Password);
@@ -83,11 +83,13 @@ namespace HardShop_API.Controllers
             return Ok(new
             {
                 token = tokenHandler.WriteToken(token),
-                username = customerFromRepo.FirstName
+                username = customerFromRepo.FirstName,
+                role = adminFromRepo.Role
+
             });
         }
 
-        [HttpPost("admins/register")]
+        [HttpPost("admin/register")]
         public async Task<IActionResult> AdminRegister(AdminRegisterDto adminRegisterDto)
         {
 
@@ -107,7 +109,7 @@ namespace HardShop_API.Controllers
             return StatusCode(201);
         }
 
-        [HttpPost("admins/login")]
+        [HttpPost("admin/login")]
         public async Task<IActionResult> AdminLogin(AdminLoginDto adminLoginDto)
         {
             var adminFromRepo = await _authRepo.AdminLogin(adminLoginDto.Email.ToLower(), adminLoginDto.Password);
@@ -138,7 +140,10 @@ namespace HardShop_API.Controllers
 
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                username = adminFromRepo.FirstName,
+                role = adminFromRepo.Role
+
             });
         }
     }

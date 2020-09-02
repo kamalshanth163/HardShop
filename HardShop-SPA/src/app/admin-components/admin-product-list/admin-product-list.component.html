@@ -1,0 +1,135 @@
+<div class="view-products">
+  <table class="table table-sm table-bordered">
+    <div class="table-head">
+      <thead>
+        <tr>
+          <th scope="col">Main Category</th>
+          <th scope="col">
+            <table>
+              <th scope="col">Sub Category</th>
+              <th>
+                <table>
+                  <th scope="col">Product</th>
+                  <th scope="col">Brand</th>
+                  <th>
+                    <table>
+                      <th scope="col">Model</th>
+                      <th scope="col">Size</th>
+                      <th scope="col">Color</th>
+                      <th scope="col">Price ($)</th>
+                      <th scope="col">Discount</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Status</th>
+                    </table>
+                  </th>
+                </table>
+              </th>
+            </table>
+          </th>
+        </tr>
+      </thead>
+    </div>
+    <div class="table-body">
+      <tbody>
+        <tr *ngFor="let category of products">
+          <div class="bg-category">
+            <td>{{ category.name }}</td>
+            <td>
+              <tr *ngFor="let subCategory of category.productSubCategories">
+                <div class="bg-sub-category">
+                  <td>{{ subCategory.name }}</td>
+                  <td>
+                    <tr *ngFor="let product of subCategory.products">
+                      <div class="bg-product">
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.brand }}</td>
+                        <td>
+                          <tr *ngFor="let option of product.productOptions">
+                            <div class="bg-option">
+                              <td>
+                                <div>{{ option.model }}</div>
+                              </td>
+                              <td>
+                                <div>{{ option.size }}</div>
+                              </td>
+                              <td>
+                                <div>{{ option.color }}</div>
+                              </td>
+                              <td>
+                                <div>{{ option.price }}</div>
+                              </td>
+                              <td>
+                                <div>{{ option.discount * 100 }}%</div>
+                              </td>
+                              <td>
+                                <div>{{ option.quantity }}</div>
+                              </td>
+                              <td>
+                                <div>{{ option.status }}</div>
+                              </td>
+                            </div>
+                          </tr>
+                        </td>
+                      </div>
+                    </tr>
+                  </td>
+                </div>
+              </tr>
+            </td>
+          </div>
+        </tr>
+      </tbody>
+    </div>
+  </table>
+</div>
+
+<!-- <div class="view-products">
+  <table class="table table-sm table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Main Category</th>
+        <th scope="col">Sub Category 1</th>
+        <th scope="col">Sub Category 2</th>
+        <th scope="col">Brand</th>
+        <th scope="col">
+          <table>
+            <th scope="col">Product</th>
+            <th scope="col">Model</th>
+            <th scope="col">Size</th>
+            <th scope="col">Color</th>
+            <th scope="col">Price</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+          </table>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of products">
+        <td>{{ category.mainCategory }}</td>
+        <td>{{ category.subCategory1 }}</td>
+        <td>{{ category.subCategory2 }}</td>
+        <td>{{ category.brand }}</td>
+        <td>
+          <tr *ngFor="let product of category.products">
+            <td>{{ product.name }}</td>
+            <td>
+              <table>
+                <tr *ngFor="let option of product.productOptions">
+                  <td>{{ option.model }}</td>
+                  <td>{{ option.size }}</td>
+                  <td>{{ option.color }}</td>
+                  <td>{{ option.price }}</td>
+                  <td>{{ option.discount }}</td>
+                  <td>{{ option.quantity }}</td>
+                  <td>{{ option.status }}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->

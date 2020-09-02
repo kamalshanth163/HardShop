@@ -35,7 +35,9 @@ namespace HardShop_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors();
             services.AddAutoMapper(typeof(CustomersRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();

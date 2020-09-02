@@ -8,6 +8,8 @@ namespace HardShop_API.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
+
         public ICollection<Card> Cards { get; set; }
     }
 }

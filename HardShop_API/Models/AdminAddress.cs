@@ -9,5 +9,6 @@ namespace HardShop_API.Models {
 
         public DateTime Created { get; set; }
 
+
     }
 }

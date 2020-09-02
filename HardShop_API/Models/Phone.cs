@@ -13,6 +13,8 @@ namespace HardShop_API.Models
         public string NatlNumber { get; set; }
         public string Number { get; set; }
         public DateTime Created { get; set; }
+        public DateTime LastUpdated { get; set; }
+
         public ICollection<CustomerPhone> CustomerPhones { get; set; }
         public ICollection<AdminPhone> AdminPhones { get; set; }
         public ICollection<SupplierDetail> SupplierDetails { get; set; }
