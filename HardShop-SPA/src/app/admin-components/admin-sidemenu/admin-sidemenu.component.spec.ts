@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AdminCategoryComponent } from './admin-category.component';
+import { AdminSidemenuComponent } from './admin-sidemenu.component';
 
-describe('AdminCategoryComponent', () => {
-  let component: AdminCategoryComponent;
-  let fixture: ComponentFixture<AdminCategoryComponent>;
+describe('AdminSidemenuComponent', () => {
+  let component: AdminSidemenuComponent;
+  let fixture: ComponentFixture<AdminSidemenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminCategoryComponent ]
+      declarations: [ AdminSidemenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminCategoryComponent);
+    fixture = TestBed.createComponent(AdminSidemenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

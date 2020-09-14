@@ -6,6 +6,8 @@ namespace HardShop_API.Dtos {
     public class CustomerRegisterDto {
         [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
 
         [Required]
@@ -28,7 +30,7 @@ namespace HardShop_API.Dtos {
         public string Role { get; set; }
 
         public DateTime Created { get; set; }
-        
+
         public DateTime LastActive { get; set; }
 
         public CustomerRegisterDto () {

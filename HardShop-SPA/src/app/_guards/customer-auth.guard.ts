@@ -6,7 +6,7 @@ import { AlertifyService } from '../_services/alertify.service.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class CustomerAuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   ) {}
   canActivate(): boolean {
     const role = localStorage.getItem('role');
-    if (!this.authService.loggedIn()) {
+    if (this.authService.loggedIn() && role === 'customer') {
       return true;
     }
     this.router.navigate(['/home']);

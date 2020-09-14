@@ -10,6 +10,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { SidebarModule } from 'ng-sidebar';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './customer-components/nav/nav.component';
@@ -28,7 +29,14 @@ import { AdminProductsComponent } from './admin-components/admin-products/admin-
 import { AdminCustomersComponent } from './admin-components/admin-customers/admin-customers.component';
 import { AdminProductCreateComponent } from './admin-components/admin-product-create/admin-product-create.component';
 import { AdminProductListComponent } from './admin-components/admin-product-list/admin-product-list.component';
-import { AdminCategoryComponent } from './admin-components/admin-category/admin-category.component';
+import { AdminAuthGuard } from './_guards/admin-auth.guard';
+import { CustomerAuthGuard } from './_guards/customer-auth.guard';
+import { NonAdminGuard } from './_guards/non-admin.guard';
+import { AdminSidemenuComponent } from './admin-components/admin-sidemenu/admin-sidemenu.component';
+import { MaterialModule } from './material-module';
+import { AdminCategoryCreateComponent } from './admin-components/admin-category-create/admin-category-create.component';
+import { AdminCategoryMainViewComponent } from './admin-components/admin-category-main-view/admin-category-main-view.component';
+import { AdminCategorySubViewComponent } from './admin-components/admin-category-sub-view/admin-category-sub-view.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +55,10 @@ import { AdminCategoryComponent } from './admin-components/admin-category/admin-
     AdminProductListComponent,
     AdminProductCreateComponent,
     AdminCustomersComponent,
-    AdminCategoryComponent,
+    AdminSidemenuComponent,
+    AdminCategoryCreateComponent,
+    AdminCategoryMainViewComponent,
+    AdminCategorySubViewComponent,
   ],
   imports: [
     HttpClientModule,
@@ -61,8 +72,16 @@ import { AdminCategoryComponent } from './admin-components/admin-category/admin-
     NgxIntlTelInputModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
+    SidebarModule.forRoot(),
+    MaterialModule,
   ],
-  providers: [AuthService, ErrorInterceptorProvider],
+  providers: [
+    AuthService,
+    ErrorInterceptorProvider,
+    CustomerAuthGuard,
+    AdminAuthGuard,
+    NonAdminGuard,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

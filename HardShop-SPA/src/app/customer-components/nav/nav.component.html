@@ -36,22 +36,46 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/home']">Home</a>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="['/home']"
+              routerLinkActive="active"
+              >Home</a
+            >
           </li>
 
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/products']">Products</a>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="['/products']"
+              routerLinkActive="active"
+              >Products</a
+            >
           </li>
 
-          <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/sign']">Sign</a>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="['/cart']"
+              routerLinkActive="active"
+            >
+              <!-- <i class="cart fa fa-shopping-cart fa-2x"><span class="count">12</span></i> -->
+              <mat-icon
+                class="icon icon-cart"
+                matBadge="4"
+                >shopping_cart</mat-icon
+              >
+            </a>
           </li>
 
-          <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/cart']"
-              ><i class="fa fa-shopping-cart fa-2x"></i
-            ></a>
+          <li *ngIf="!loggedIn()" class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="['/sign']"
+              routerLinkActive="active"
+              >Sign</a
+            >
           </li>
 
           <div *ngIf="loggedIn()" class="dropdown show" dropdown>

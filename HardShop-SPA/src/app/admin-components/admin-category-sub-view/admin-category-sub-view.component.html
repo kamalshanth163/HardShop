@@ -1,0 +1,76 @@
+<div class="sub-view-wrapper">
+  <div class="row">
+    <div class="heading">
+      <h4>Main Category > Sub Category</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="detail">
+        <h5 class="sub-heading">Details</h5>
+        <div>
+          <h6 class="label">Created</h6>
+          <p class="data">2020 / 04 / 12</p>
+        </div>
+        <div>
+          <h6 class="label">Last Updated</h6>
+          <p class="data">2020 / 07 / 31</p>
+        </div>
+        <div>
+          <h6 class="label">Number of Products</h6>
+          <p class="data">23</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="update-form">
+        <form
+          [formGroup]="subCategoryUpdateForm"
+          (ngSubmit)="updateSubCategory()"
+        >
+          <div class="form-row">
+            <h5 class="mb-4">Update the sub category</h5>
+            <div class="form-group col-md-12">
+              <label>Sub category name</label>
+              <input
+                [ngClass]="{
+                  'is-invalid':
+                    subCategoryUpdateForm.get('name').errors &&
+                    subCategoryUpdateForm.get('name').touched
+                }"
+                class="form-control"
+                formControlName="name"
+              />
+              <div class="invalid-feedback">Please enter a main category</div>
+            </div>
+          </div>
+          <button
+            class="btn btn-warning"
+            [disabled]="!subCategoryUpdateForm.valid"
+            type="submit"
+          >
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="products">
+        <h5 class="sub-heading">Products</h5>
+        <div class="grid-container">
+          <div class="grid-item">1</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

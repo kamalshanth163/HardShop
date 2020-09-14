@@ -1,0 +1,150 @@
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+#sidenavContainer {
+  margin-top: 60px;
+}
+
+#sidenav {
+  width: 240px;
+  transition: width 400ms;
+  background: #1f1f1f;
+  color: #ffb916;
+}
+
+#sidenav.close {
+  width: 60px !important;
+  transition: width 400ms;
+  opacity: unset;
+}
+#sidenav.close ul li a span,
+#sidenav.close ul li a .btn {
+  display: none;
+}
+#sidenav.close ul li a .icon {
+  color: #999;
+  border: none !important;
+  outline: 0;
+}
+
+#sidenav.open {
+  width: 240px;
+  transition: width 400ms;
+}
+
+#sidenav .sidebar_inner {
+  position: relative;
+  padding: 0px 0px;
+}
+
+#sidenav ul li a {
+  height: 60px;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px 16px !important;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+  transition: all 0.3s ease;
+  border: 0px;
+}
+
+#sidenav ul li a .icon {
+  margin-right: 15px;
+  color: #999;
+}
+
+#sidenav ul li a span {
+  display: inline-block;
+}
+
+#sidenav ul li a:hover {
+  background: rgb(24, 24, 24);
+  transition: background-color 300ms;
+  color: #f1f1f1;
+  cursor: pointer;
+}
+
+#sidenav ul li a.activeLink {
+  background: rgb(226, 226, 226);
+  color: #183953;
+  transition: background-color 300ms;
+  cursor: pointer;
+}
+
+#sidenav .icon {
+  color: rgb(133, 133, 133);
+}
+
+#sidenav ul li a.activeLink .icon {
+  color: #183953;
+}
+
+#sidenavContent {
+  width: calc(100% - 240px);
+}
+
+#sidenav ul li a .btn {
+  position: absolute;
+  right: 20px;
+  color: whitesmoke;
+}
+#sidenav ul li a.activeLink .btn {
+  position: absolute;
+  right: 20px;
+  color: #222;
+}
+
+#sidenav ul li a .open-btn {
+  margin-left: 100px;
+  font-size: 20px;
+}
+#sidenav ul li a .close-btn {
+  margin-left: 100px;
+  font-size: 20px;
+}
+#sidenav ul li #subMenu {
+  position: relative;
+  z-index: 999999999;
+  padding: 10px 10px;
+  height: auto;
+  text-align: left;
+  background: whitesmoke;
+  overflow: unset;
+}
+
+
+#sidenav ul li #subMenu .subMenuLink {
+  height: auto;
+  display: block;
+  padding: 6px 20px !important;
+  margin: 4px;
+  font-size: 14px;
+  color: rgb(59, 59, 59);
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+#sidenav ul li #subMenu .subMenuLink:hover {
+  background: rgb(228, 228, 228);
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+}
+#sidenav ul li #subMenu .subMenuLink.active {
+  background: rgb(228, 228, 228);
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+}
+
+#sidenav ul li #subMenu .subMenuLink .sub-icon{
+  color: red;
+  padding: 0;
+}
+
+#sidenavContent{
+  padding: 20px 40px;
+}
+

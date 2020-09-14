@@ -145,10 +145,4 @@ export class SignComponent implements OnInit {
     const token = localStorage.getItem('token');
     return !!token;
   }
-
-  logout() {
-    localStorage.removeItem('token');
-    this.alertify.message('logged out');
-    this.router.navigate(['/home']);
-  }
 }

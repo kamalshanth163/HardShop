@@ -47,8 +47,10 @@ export class AuthService {
         if (admin) {
           localStorage.setItem('token', admin.token);
           localStorage.setItem('username', admin.username);
+          localStorage.setItem('role', admin.role);
           this.decodedToken = this.jwtHelper.decodeToken(admin.token);
           this.username = admin.username;
+          this.role = admin.role;
         }
       })
     );
@@ -62,5 +64,4 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
-
 }

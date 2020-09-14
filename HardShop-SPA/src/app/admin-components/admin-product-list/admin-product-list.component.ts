@@ -31,7 +31,7 @@ export class AdminProductListComponent implements OnInit {
     this.productService.getMainCategories().subscribe(
       (products: any) => {
         this.products = products;
-        console.log(this.products);
+        // console.log(this.products);
       },
       (error) => {
         this.alertify.error(error);

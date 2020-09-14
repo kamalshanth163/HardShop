@@ -1,38 +1,94 @@
-.navbar{
-    font-size: 14px;
-    height: 70px;
+.navbar {
+  font-size: 14px;
+  height: 70px;
+  border-bottom: 4px solid rgb(240, 202, 78);
 }
-.nav-item{
-    margin: 0 10px;
-    /* line-height: 30px; */
+.navbar-brand{
+    color: rgb(0, 0, 0);
+    border: 6px solid rgb(28, 59, 71);
+    border-bottom: 0px;
+    padding: 0px 10px;
+    margin-bottom: -20px;
+}
+.nav-item {
+  margin: 0 10px;
+  /* line-height: 30px; */
 }
 .search-bar {
-    width: 500px;
-    height: 30px;
-    line-height: 60px;
-    margin-left: 100px;
+  width: 500px;
+  height: 30px;
+  line-height: 60px;
+  margin-left: 100px;
 }
 
-.search-bar .form-control{
-    font-size: 14px;
+.search-bar .form-control {
+  font-size: 14px;
+    background: whitesmoke;
     border: 0px;
 }
-.search-bar .btn{
-    font-size: 14px;
-    background: rgb(231, 231, 231);
-    border: 0px;
-    border-radius: 0px;
-
+.search-bar .btn {
+  font-size: 14px;
+  background: rgb(255, 255, 255);
+  border: 0px;
+  border-radius: 0px;
 }
-.search-bar .search-icon{
-    border-radius: 0px;
-    background: rgb(78, 78, 78);
-}
-
-ng-sidebar-container{
-    display: none;
+.search-bar .search-icon {
+  border-radius: 0px;
+  background: rgb(255, 255, 255);
+  color: black;
 }
 
-.nav-customer{
-    background: rgb(35, 32, 51);
+ng-sidebar-container {
+  display: none;
+}
+
+.nav-customer {
+  background: #ffffff;
+  font-size: 14px;
+}
+
+.nav-item a {
+  color: rgb(54, 54, 54);
+}
+.nav-item a:hover {
+  color: rgb(73, 73, 73);
+}
+.nav-item .cart{
+    color: #666;
+}
+
+.nav-item .cart .count{
+    background: rgb(194, 57, 39);
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    padding: 2px 4px;
+    text-align: center;
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+    font-family: arial;
+}
+.nav-item a.active {
+  color: rgb(56, 78, 102);
+  border-bottom: 2px solid rgb(58, 71, 87);
+  padding: 7px;
+  padding-bottom: 2px;
+  margin: 0 10px;
+}
+
+.nav-customer .navbar-brand .batch {
+  background: rgb(87, 87, 87);
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  border: none;
+  padding: 2px 4px;
+}
+
+.nav-customer .dropdown .btn {
+  background: rgb(66, 66, 66);
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  margin-left: 20px;
 }

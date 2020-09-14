@@ -5,11 +5,12 @@ import { AlertifyService } from 'src/app/_services/alertify.service.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-category',
-  templateUrl: './admin-category.component.html',
-  styleUrls: ['./admin-category.component.css'],
+  selector: 'app-admin-category-create',
+  templateUrl: './admin-category-create.component.html',
+  styleUrls: ['./admin-category-create.component.css']
 })
-export class AdminCategoryComponent implements OnInit {
+export class AdminCategoryCreateComponent implements OnInit {
+
   subCategory: any;
   mainCategory: any;
   subCategories: any = [];

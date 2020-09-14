@@ -6,7 +6,7 @@ import { AlertifyService } from '../_services/alertify.service.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AdminAuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -14,10 +14,10 @@ export class AuthGuard implements CanActivate {
   ) {}
   canActivate(): boolean {
     const role = localStorage.getItem('role');
-    if (!this.authService.loggedIn()) {
+    if (this.authService.loggedIn() && role === 'admin') {
       return true;
     }
-    this.router.navigate(['/home']);
+    this.router.navigate(['/admin/sign']);
     this.alertify.error('You shall not pass !!');
   }
 }

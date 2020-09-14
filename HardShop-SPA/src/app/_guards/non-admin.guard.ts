@@ -4,9 +4,9 @@ import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class NonAdminGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -14,10 +14,12 @@ export class AuthGuard implements CanActivate {
   ) {}
   canActivate(): boolean {
     const role = localStorage.getItem('role');
-    if (!this.authService.loggedIn()) {
-      return true;
+    if (this.authService.loggedIn() && role === 'admin') {
+      this.router.navigate(['/admin/dashboard']);
+      this.alertify.error('You shall not pass !!');
+      return false;
     }
-    this.router.navigate(['/home']);
-    this.alertify.error('You shall not pass !!');
+    return true;
   }
+  
 }

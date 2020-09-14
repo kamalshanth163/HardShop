@@ -1,7 +1,6 @@
 .view-products {
   padding: 20px 0px;
-  overflow: scroll;
-  /* height: 500px; */
+  /* background: red; */
 }
 
 .table-head {
@@ -12,7 +11,7 @@
 }
 
 .table-body {
-  height: 480px;
+  height: 60vh;
   overflow-y: scroll;
 }
 
@@ -52,7 +51,7 @@ table tbody td {
   font-size: 13px;
   padding: 4px;
   padding-left: 10px;
-  vertical-align: middle;
+  vertical-align: top;
   color: rgb(65, 65, 65);
 }
 

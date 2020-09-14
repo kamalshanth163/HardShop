@@ -10,8 +10,17 @@
 body{
     /* background: rgb(243, 243, 243); */
     /* background: rgb(255, 255, 255); */
-    background: rgb(250, 250, 250);
+    background: rgb(255, 255, 255);
 }
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 
 .alertify-notifier .ajs-message {
     background: rgba(63, 63, 63, 0.95);

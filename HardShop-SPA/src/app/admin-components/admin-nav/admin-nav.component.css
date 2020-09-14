@@ -1,7 +1,14 @@
 .nav-admin {
-  background: rgb(24, 167, 88);
-  font-size: 14px;
+  background: #ffb916;
+  font-size: 12px;
+  padding: 0px 20px;
+  height: 60px;
 }
+.nav-admin .navbar-brand {
+  color: white;
+  margin-left: 40px;
+}
+
 .nav-admin .navbar-brand .batch {
   background: rgb(87, 87, 87);
   color: white;
@@ -9,4 +16,77 @@
   border-radius: 4px;
   border: none;
   padding: 2px 4px;
+}
+
+.nav-admin .menu-icon {
+  color: rgb(32, 32, 32);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.nav-admin .dropdown .btn {
+  background: rgba(66, 66, 66, 0);
+  color: rgb(31, 31, 31);
+  font-size: 16px;
+  margin-left: 20px;
+}
+.nav-admin .dropdown .dropdown-menu {
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 4px;
+
+}
+.nav-admin .dropdown .dropdown-item {
+  margin: 0 !important;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  /* background: red !important; */
+}
+.nav-admin .dropdown .dropdown-item:hover {
+  margin: 0 !important;
+  border-radius: 4px;
+}
+.nav-admin .profile {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  /* padding: 20px 0; */
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  /* background: green; */
+}
+
+.nav-admin .profile .img {
+  padding: 0px;
+}
+
+.nav-admin .profile img {
+  width: 30px;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 50%;
+}
+
+.nav-admin .profile p:first-child {
+  font-size: 14px;
+  color: #80cbc4;
+  margin-bottom: 3px;
+}
+.nav-admin .right {
+  float: right;
+}
+
+.nav-admin .right ul {
+  padding: 0;
+  margin: 0;
+}
+.nav-admin .right ul li {
+  display: inline-block;
+  margin: 0px 10px;
+}
+.nav-admin .right ul li a {
+  color: rgb(19, 19, 19);
+  font-size: 14px;
+  padding: 10px;
+  font-family: arial;
+  text-decoration: none;
 }

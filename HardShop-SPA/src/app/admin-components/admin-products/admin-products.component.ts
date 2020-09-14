@@ -8,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProductsComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
-  }
+  constructor(
+
+  ) {}
+
+  ngOnInit() {}
+
+
+
+
+
+
 }

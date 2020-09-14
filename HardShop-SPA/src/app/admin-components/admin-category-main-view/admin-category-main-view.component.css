@@ -1,0 +1,59 @@
+.main-view-wrapper{
+    padding: 0px 40px;
+}
+.heading {
+    font-size: 30px;
+    margin: 20px;
+    padding: 10px;
+    /* background: rgb(236, 125, 125); */
+    width: 100%;
+}
+
+.detail {
+    padding: 20px 40px;
+    background: rgb(250, 250, 250);
+    border: 1px solid #666;
+    border-radius: 10px;
+    width: 100%;
+}
+.sub-heading{
+    padding: 0px;
+}
+.detail .label{
+    padding: 0px 10px;
+    color: rgb(64, 64, 128);
+}
+.detail .data{
+    color: rgb(47, 47, 47);
+    padding: 0px 10px;
+
+}
+
+.sub-categories {
+    margin-top: 20px;
+    padding: 40px 40px;
+    border-radius: 10px;
+
+}
+
+.sub-categories .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+.sub-categories .grid-item {
+  background-color: rgba(212, 212, 212, 0.8);
+  border-radius: 10px;
+  color: #111;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.update-form form{
+    padding: 60px;
+}
+.update-form .btn{
+    float: right;
+}

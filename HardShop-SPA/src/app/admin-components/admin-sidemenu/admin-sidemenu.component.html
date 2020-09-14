@@ -1,0 +1,156 @@
+<app-admin-nav (toggle)="toggleChange($event)"></app-admin-nav>
+<div *ngIf="loggedIn()" class="wrapper">
+  <mat-sidenav-container id="sidenavContainer" fullscreen [hasBackdrop]="false">
+    <mat-sidenav
+      id="sidenav"
+      mode="push"
+      opened
+      [class.open]="isOpen"
+      [class.close]="!isOpen"
+    >
+      <div class="sidebar_inner">
+        <ul class="navbar-nav ml-auto">
+          <!-- -------------------------------------------------------------------------- -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="[routerLinkDashboard]"
+              routerLinkActive="active"
+              (click)="clickedMenuLink('dashboard')"
+              ngClass="{{ active.dashboard ? 'activeLink' : 'none' }}"
+            >
+              <mat-icon class="icon">dashboard</mat-icon>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <!-- -------------------------------------------------------------------------- -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="[routerLinkProducts]"
+              routerLinkActive="active"
+              (click)="clickedMenuLink('products')"
+              ngClass="{{ active.products ? 'activeLink' : 'none' }}"
+            >
+              <mat-icon class="icon">construction</mat-icon>
+              <span>Products</span>
+              <i
+                *ngIf="displayStatus.products === 'none'"
+                class="open-btn btn fa fa-angle-right"
+              ></i>
+              <i
+                *ngIf="displayStatus.products === 'block'"
+                class="close-btn btn fa fa-angle-down"
+              ></i>
+            </a>
+            <div
+              *ngIf="showSubMenu"
+              id="subMenu"
+              [ngStyle]="{
+                display: displayStatus.products,
+                position: subMenuPosition,
+                'margin-left.px': subMenuMarginLeft,
+                'margin-top.px': subMenuMarginTop
+              }"
+            >
+              <a
+                (click)="clickedSubMenuLink($event)"
+                class="subMenuLink"
+                [routerLink]="['/admin/products/list']"
+                routerLinkActive="active"
+              >
+                View All
+              </a>
+              <a
+                (click)="clickedSubMenuLink($event)"
+                class="subMenuLink"
+                [routerLink]="['/admin/products/create']"
+                routerLinkActive="active"
+              >
+                Create Products</a
+              >
+              <a
+                (click)="clickedSubMenuLink($event)"
+                class="subMenuLink"
+                [routerLink]="['/admin/products/categories/create']"
+                routerLinkActive="active"
+              >
+                Create & View Categories</a
+              >
+            </div>
+          </li>
+          <!-- -------------------------------------------------------------------------- -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="[routerLinkCustomers]"
+              routerLinkActive="active"
+              (click)="clickedMenuLink('customers')"
+              ngClass="{{ active.customers ? 'activeLink' : 'none' }}"
+            >
+              <mat-icon class="icon">group</mat-icon>
+              <span>Customers</span>
+              <i
+                *ngIf="displayStatus.customers === 'none'"
+                class="open-btn btn fa fa-angle-right"
+              ></i>
+              <i
+                *ngIf="displayStatus.customers === 'block'"
+                class="close-btn btn fa fa-angle-down"
+              ></i>
+            </a>
+            <div
+              id="subMenu"
+              [ngStyle]="{
+                display: displayStatus.customers,
+                position: subMenuPosition,
+                'margin-left.px': subMenuMarginLeft,
+                'margin-top.px': subMenuMarginTop
+              }"
+            >
+              <a class="subMenuLink">All</a>
+              <a class="subMenuLink">Create products</a>
+              <a class="subMenuLink">Create catogories</a>
+            </div>
+          </li>
+          <!-- -------------------------------------------------------------------------- -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="[routerLinkSales]"
+              routerLinkActive="active"
+              (click)="clickedMenuLink('sales')"
+              ngClass="{{ active.sales ? 'activeLink' : 'none' }}"
+            >
+              <mat-icon class="icon">monetization_on</mat-icon>
+              <span>Sales</span>
+            </a>
+          </li>
+          <!-- -------------------------------------------------------------------------- -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="[routerLinkPurchase]"
+              routerLinkActive="active"
+              (click)="clickedMenuLink('purchase')"
+              ngClass="{{ active.purchase ? 'activeLink' : 'none' }}"
+            >
+              <mat-icon class="icon">local_shipping</mat-icon>
+              <span>Purchase</span>
+            </a>
+          </li>
+          <!-- -------------------------------------------------------------------------- -->
+        </ul>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content
+      id="sidenavContent"
+      [ngStyle]="{
+        'margin-left.px': contentMargin,
+        width: 'calc(100% - ' + contentMargin + 'px)'
+      }"
+    >
+      <router-outlet id="router-outlet"></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

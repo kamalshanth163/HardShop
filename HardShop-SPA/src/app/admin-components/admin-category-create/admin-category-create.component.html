@@ -1,0 +1,122 @@
+<div class="manage-categories">
+    <div class="row">
+      <div class="form col-md-6">
+        <div class="category-form">
+          <div class="main-category">
+            <form
+              [formGroup]="mainCategoryCreateForm"
+              (ngSubmit)="createMainCategory()"
+            >
+              <div class="form-row">
+                <h5>Create a main category</h5>
+                <div class="form-group col-md-12">
+                  <label>Main category name</label>
+                  <input
+                    [ngClass]="{
+                      'is-invalid':
+                        mainCategoryCreateForm.get('name').errors &&
+                        mainCategoryCreateForm.get('name').touched
+                    }"
+                    class="form-control"
+                    formControlName="name"
+                  />
+                  <div class="invalid-feedback">Please enter a main category</div>
+                </div>
+              </div>
+              <button
+                class="btn btn-success"
+                [disabled]="!mainCategoryCreateForm.valid"
+                type="submit"
+              >
+                Create
+              </button>
+            </form>
+          </div>
+          <div class="sub-category">
+            <form
+              [formGroup]="subCategoryCreateForm"
+              (ngSubmit)="createSubCategory()"
+            >
+              <div class="form-row">
+                <h5>Create a sub category</h5>
+                <div class="form-group col-md-12">
+                  <label>Select a main category</label>
+                  <select
+                    [ngClass]="{
+                      'is-invalid':
+                        subCategoryCreateForm.get('mainCategory').errors &&
+                        subCategoryCreateForm.get('mainCategory').touched
+                    }"
+                    class="form-control"
+                    formControlName="mainCategory"
+                  >
+                    <option
+                      *ngFor="let mainCategory of mainCategories"
+                      value="{{ mainCategory.name }}"
+                    >
+                      {{ mainCategory.name }}
+                    </option>
+                  </select>
+                  <div class="invalid-feedback">Please enter a main category</div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label>Sub category name</label>
+                  <input
+                    [ngClass]="{
+                      'is-invalid':
+                        subCategoryCreateForm.get('name').errors &&
+                        subCategoryCreateForm.get('name').touched
+                    }"
+                    class="form-control"
+                    formControlName="name"
+                  />
+                  <div class="invalid-feedback">Please enter a sub category</div>
+                </div>
+              </div>
+              <button
+                class="btn btn-success"
+                [disabled]="!subCategoryCreateForm.valid"
+                type="submit"
+              >
+                Create
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="table col-md-6">
+        <table class="table table-sm table-bordered">
+          <div class="table-head">
+            <thead>
+              <tr>
+                <div>
+                  <th scope="col">Main Category</th>
+                  <th scope="col">Sub Category</th>
+                </div>
+              </tr>
+            </thead>
+          </div>
+          <div class="table-body">
+            <tbody>
+              <tr *ngFor="let mainCategory of mainCategories">
+                <div class="bg-main">
+                  <td>{{ mainCategory.name }}</td>
+                  <td>
+                    <tr
+                      *ngFor="let subCategory of mainCategory.productSubCategories"
+                    >
+                      <div class="bg-sub">
+                        {{ subCategory.name }}
+                      </div>
+                    </tr>
+                  </td>
+                </div>
+              </tr>
+            </tbody>
+          </div>
+  
+        </table>
+      </div>
+    </div>
+  </div>
+  

@@ -93,7 +93,7 @@ export class AdminSignComponent implements OnInit {
       this.authService.adminLogin(this.adminForLogin).subscribe(
         (next) => {
           this.alertify.success('Successfully Logged in!!');
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin/dashboard']);
         },
         (error) => {
           this.alertify.error(error);
@@ -120,7 +120,7 @@ export class AdminSignComponent implements OnInit {
         },
         () => {
           this.authService.adminLogin(this.admin).subscribe(() => {
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/admin/dashboard']);
           });
         }
       );
@@ -137,11 +137,5 @@ export class AdminSignComponent implements OnInit {
   loggedIn() {
     const token = localStorage.getItem('token');
     return !!token;
-  }
-
-  logout() {
-    localStorage.removeItem('token');
-    this.alertify.message('logged out');
-    this.router.navigate(['/admin']);
   }
 }
